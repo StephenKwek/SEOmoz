@@ -3,7 +3,7 @@ web.config.debug = True
 render = web.template.render('templates/')
 
 urls = (
-    '/(.*)', 'index', 'cover', 'startup', 'code'
+    '/(.*)', 'index', 'cover', 'resume', 'code'
 )
 
 class index:
@@ -11,7 +11,7 @@ class index:
 	if name == "cover":
 		return render.cover()
 	elif name == "resume":
-		return render.startup()
+		return render.resume()
 	elif name == "index":
 		return render.index()
 	elif name == "code":
