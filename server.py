@@ -10,11 +10,11 @@ class index:
     def GET(self, name):
 	if name == "cover":
 		return render.cover()
-	if name == "resume":
+	elif name == "resume":
 		return render.startup()
-	if name == "index":
+	elif name == "index":
 		return render.index()
-	if name == "code":
+	elif name == "code":
 		return render.code()
 	else: 
 		return render.index()
