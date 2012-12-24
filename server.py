@@ -7,7 +7,6 @@ textPages = ['index', 'cover', 'resume', 'code']
 codePages = ['checkBST', 'divide', 'log2', 'matchPattern', 'nQueen', 'stock']
 urls = ['/(.*)'] + textPages + codePages
 
-#urls = ('/(.*)', 'index', 'cover', 'resume', 'code', 'checkBST', 'divide', 'log2', 'matchPattern', 'nQueen', 'stock')
 app = web.application(urls, globals())
 
 class index:

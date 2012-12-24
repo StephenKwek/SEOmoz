@@ -3,4 +3,6 @@
 ~/Tools/cpphtml.exe log2.cpp > ../codePages/log2.html
 ~/Tools/cpphtml.exe matchPattern.cpp > ../codePages/matchPattern.html
 ~/Tools/cpphtml.exe nQueen.cpp > ../codePages/nQueen.html
-~/Tools/cpphtml.exe stock.cpp > stock.html
+~/Tools/cpphtml.exe stock.cpp > ../codePages/stock.html
+~/Tools/cpphtml.exe dynamicProgramming.cpp > ../codePages/dynamicProgramming.html
+
