@@ -8,7 +8,7 @@
 	<META NAME="AUTHOR" CONTENT="Stephen Kwek">
 	<META NAME="CREATED" CONTENT="20121222;16173200">
 	<META NAME="CHANGEDBY" CONTENT="Stephen Kwek">
-	<META NAME="CHANGED" CONTENT="20121224;8273000">
+	<META NAME="CHANGED" CONTENT="20121224;8342200">
 	<META NAME="robots" CONTENT="noindex">
 	<META NAME="CHANGEDBY" CONTENT="Stephen Kwek">
 	<META NAME="CHANGEDBY" CONTENT="Stephen Kwek">
@@ -69,17 +69,17 @@ lower-bound. </FONT>
 		<P><FONT SIZE=3><B>Comment: </B><FONT FACE="Times New Roman, serif"><SPAN STYLE="font-weight: normal">The
 		idea here is to </SPAN></FONT></FONT>
 		</P>
-		<LI><P STYLE="font-weight: normal"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>1.
-		maintain a current min and current max. Initially both have A[0] as
-		their values. They are  updated as we scan the next element. </FONT></FONT>
+		<LI><P STYLE="font-weight: normal"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>maintain
+		a current min and current max. Initially both have A[0] as their
+		values. They are  updated as we scan the next element. </FONT></FONT>
 		</P>
-		<LI><P STYLE="font-weight: normal"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>2.
-		When we have a new max value, we check if current max - current min
-		is greater than the 'bestSoFar'. </FONT></FONT>
+		<LI><P STYLE="font-weight: normal"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>When
+		we have a new max value, we check if current max - current min is
+		greater than the 'bestSoFar'. </FONT></FONT>
 		</P>
-		<LI><P STYLE="font-weight: normal"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>3.
-		When we have a new min value, we start all over by also setting max
-		to the new min. </FONT></FONT>
+		<LI><P STYLE="font-weight: normal"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>When
+		we have a new min value, we start all over by also setting max to
+		the new min. </FONT></FONT>
 		</P>
 		<P><FONT SIZE=3><B>Code:</B></FONT><FONT SIZE=3> <A HREF="stock">available
 		here</A>.</FONT></P>
@@ -112,50 +112,53 @@ lower-bound. </FONT>
 	representation of this type of problems. </SPAN></FONT>
 	</P>
 	<OL>
-		<P STYLE="font-weight: normal"><FONT SIZE=3>Problem: Given a
+		<P STYLE="font-weight: normal"><FONT SIZE=3><B>Problem:</B> Given a
 		binary-tree, determine if it is a valid binary search tree. A bonus
 		point is to check that it is indeed a tree (a tree is a graph with
 		all nodes connected but without cycle). </FONT>
 		</P>
-		<P STYLE="font-weight: normal"><FONT SIZE=3>Comment: There are a
-		number of ways to solve this. My favorite is to use the fact that
-		if the binary-tree is indeed a binary search tree than the values
-		of the nodes visited in an in-order traversal are in monotonically
-		increasing order. </FONT>
+		<P STYLE="font-weight: normal"><FONT SIZE=3><B>Comment:</B> There
+		are a number of ways to solve this. My favorite is to use the fact
+		that if the binary-tree is indeed a binary search tree than the
+		values of the nodes visited in an in-order traversal are in
+		monotonically increasing order. </FONT>
 		</P>
-		<P><FONT SIZE=3><SPAN STYLE="font-weight: normal">Code: <A HREF="checkBST">available
-		here</A>.</SPAN></FONT></P>
+		<P><FONT SIZE=3><B>Code:</B></FONT><FONT SIZE=3><SPAN STYLE="font-weight: normal">
+		<A HREF="checkBST">available here</A>.</SPAN></FONT></P>
 	</OL>
 	<LI><P><FONT SIZE=3><B>String Parsing</B>: write a simple regular
 	expression matcher, evaluation of arithmetic expression,
 	palindrome-related questions. </FONT>
 	</P>
 	<OL>
-		<P><FONT SIZE=3>Problem: Write a simple pattern matching function
-		that match '.' to any single character and '*' to any normal of the
-		preceding characters. Example match(“aa”, “a”),
+		<P><FONT SIZE=3><B>Problem:</B> Write a simple pattern matching
+		function that match '.' to any single character and '*' to any
+		normal of the preceding characters. Example match(“aa”, “a”),
 		match(“aaa”,”aa”) return false, while match (“aaab”,
 		“a*a*b”) and match(“aaaba”, “a*.a”) return true.</FONT></P>
-		<P><FONT SIZE=3>Code: <A HREF="matchPattern">available here</A>.</FONT></P>
+		<P><FONT SIZE=3><B>Code:</B></FONT><FONT SIZE=3> <A HREF="matchPattern">available
+		here</A>.</FONT></P>
 		<P><FONT SIZE=3>Another interesting problem that written in C/C++
 		will take a few lines but in python is a one liner. </FONT>
 		</P>
-		<P><FONT SIZE=3>Problem: Give a string say “This is an example”,
-		reverse each word in the string to obtain “sihT si na elpmaxe”.</FONT></P>
-		<P><FONT SIZE=3>Code: ' '.join([w[::-1] for w in line.split(' ')])</FONT></P>
+		<P><FONT SIZE=3><B>Problem:</B> Give a string say “This is an
+		example”, reverse each word in the string to obtain “sihT si na
+		elpmaxe”.</FONT></P>
+		<P><FONT SIZE=3><B>Code: </B>' '.join([w[::-1] for w in
+		line.split(' ')])</FONT></P>
 	</OL>
 	<LI><P><FONT SIZE=3><B>Combinatorial Enumeration</B>: powerset,
 	permutation and combination with/with item duplications. My favorite
 	is </FONT>
 	</P>
 	<OL>
-		<P><FONT SIZE=3>Problem (Gray Code): Enumerate all length N
+		<P><FONT SIZE=3><B>Problem:</B> (Gray Code): Enumerate all length N
 		{0,1}-string such that consecutive strings differ by only 1-bit. </FONT>
 		</P>
-		<P><FONT SIZE=3>Comment: For a given N, gray code is uniquely
-		defined (subject to rotation). </FONT>
+		<P><FONT SIZE=3><B>Comment: </B>For a given N, gray code is
+		uniquely defined (subject to rotation). </FONT>
 		</P>
-		<P><FONT SIZE=3>Code: (python)</FONT></P>
+		<P><FONT SIZE=3><B>Code:</B> (python)</FONT></P>
 		<OL>
 			<P><FONT FACE="Courier New, monospace"><FONT SIZE=3>def
 			grayCode(n):</FONT></FONT></P>
@@ -178,19 +181,21 @@ lower-bound. </FONT>
 	related to bit manipulation is </FONT>
 	</P>
 	<OL>
-		<P><FONT SIZE=3>Problem: perform division without multiplication.</FONT></P>
-		<P><FONT SIZE=3>Code: <A HREF="divide">available here</A>.</FONT></P>
+		<P><FONT SIZE=3><B>Problem:</B> perform division without
+		multiplication.</FONT></P>
+		<P><FONT SIZE=3><B>Code:</B></FONT><FONT SIZE=3> <A HREF="divide">available
+		here</A>.</FONT></P>
 	</OL>
 	<LI><P><FONT SIZE=3><B>List (pointer) Manipulation</B>: basic linked
 	list, double linked list problems. The classic (attributed to MS I
 	believe) being:</FONT></P>
 	<OL>
-		<P><FONT SIZE=3>Problem: Given a linked list, determine if there is
-		a loop.</FONT></P>
-		<P><FONT SIZE=3>Comment: The solution is to have a fast pointer
-		traveling two nodes in one iteration and one slow pointer traveling
-		one node at a time. If there is no loop, the fast pointer will fall
-		off the list whereas the </FONT>
+		<P><FONT SIZE=3><B>Problem:</B> Given a linked list, determine if
+		there is a loop.</FONT></P>
+		<P><FONT SIZE=3><B>Comment:</B> The solution is to have a fast
+		pointer traveling two nodes in one iteration and one slow pointer
+		traveling one node at a time. If there is no loop, the fast pointer
+		will fall off the list whereas the </FONT>
 		</P>
 	</OL>
 	<LI><P><FONT SIZE=3><B>Sorting, (linear) Search and Merging</B>:
@@ -199,8 +204,8 @@ lower-bound. </FONT>
 	simple solution is the following. </FONT>
 	</P>
 	<OL>
-		<P><FONT SIZE=3>Problem: A vector with a specific number occurring
-		more than half of the time.</FONT></P>
+		<P><FONT SIZE=3><B>Problem:</B> A vector with a specific number
+		occurring more than half of the time.</FONT></P>
 	</OL>
 	<LI><P><FONT SIZE=3><B>Dynamic Programming</B>: In a nutshell,
 	dynamic programming starts with solutions for the trivial cases (i,e
@@ -212,20 +217,21 @@ lower-bound. </FONT>
 	a graph with partial (linear) order. </FONT>
 	</P>
 	<OL>
-		<P><FONT SIZE=3>Problem: Given a NxM rectangular grid, a robot can
-		travel from a cell to a neighboring cells. However, a small number
-		of edges in these grids are missing. Compute how many possible
-		(shortest) paths are there from the top-left corner to the
+		<P><FONT SIZE=3><B>Problem: </B>Given a NxM rectangular grid, a
+		robot can travel from a cell to a neighboring cells. However, a
+		small number of edges in these grids are missing. Compute how many
+		possible (shortest) paths are there from the top-left corner to the
 		bottom-right corner. </FONT>
 		</P>
-		<P><FONT SIZE=3>Comment: Assuming that N and M can be quite large,
-		the straightforward approach of maintaining a 2D table may not be
-		feasible and it is not memory efficient to store the missing edges
-		in a sparse adjacency matrix. </FONT>
+		<P><FONT SIZE=3><B>Comment:</B> Assuming that N and M can be quite
+		large, the straightforward approach of maintaining a 2D table may
+		not be feasible and it is not memory efficient to store the missing
+		edges in a sparse adjacency matrix. </FONT>
 		</P>
-		<P><FONT SIZE=3>Code: There are three versions of the code, the
-		first uses a 2D O(MN) table, the second maintain the current two
-		O(M) rows that we are processing. The last maintain only 1 row. </FONT>
+		<P><FONT SIZE=3><B>Code: </B>There are three versions of the code,
+		the first uses a 2D O(MN) table, the second maintain the current
+		two O(M) rows that we are processing. The last maintain only 1 row.
+		</FONT>
 		</P>
 	</OL>
 </OL>
