@@ -30,7 +30,7 @@ class index:
         if action.has_key(name):
             return action[name]
         else: 
-            return action["index"]
+            return action["cover"]
 
     
 if __name__ == "__main__":
