@@ -3,12 +3,11 @@
 <HEAD>
 	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
 	<TITLE>CODE SAMPLE</TITLE>
-	<meta name="robots" content="noindex">
 	<META NAME="GENERATOR" CONTENT="LibreOffice 3.5  (Linux)">
 	<META NAME="AUTHOR" CONTENT="Stephen Kwek">
 	<META NAME="CREATED" CONTENT="20121222;16173200">
 	<META NAME="CHANGEDBY" CONTENT="Stephen Kwek">
-	<META NAME="CHANGED" CONTENT="20121224;8342200">
+	<META NAME="CHANGED" CONTENT="20121224;11205000">
 	<META NAME="robots" CONTENT="noindex">
 	<META NAME="CHANGEDBY" CONTENT="Stephen Kwek">
 	<META NAME="CHANGEDBY" CONTENT="Stephen Kwek">
@@ -83,6 +82,33 @@ lower-bound. </FONT>
 		</P>
 		<P><FONT SIZE=3><B>Code:</B></FONT><FONT SIZE=3> <A HREF="stock">available
 		here</A>.</FONT></P>
+	</OL>
+	<LI><P><FONT SIZE=3><B>Dynamic Programming</B>: In a nutshell,
+	dynamic programming starts with solutions for the trivial cases (i,e
+	boundary condition) and subsequently, extend the partial solution to
+	even larger partial solution (using a recurrence relation) until we
+	solved the entire problem. It involves maintaining a data structure,
+	typically in the form of an array (could be 1D, 2D, 3D, etc).
+	Sometime the data structure could be a tree, a triangular matrix, or
+	a graph with partial (linear) order. </FONT>
+	</P>
+	<OL>
+		<P><FONT SIZE=3><B>Problem: </B>Given a NxM rectangular grid, a
+		robot can travel from a cell to a neighboring cells. However, a
+		small number of edges in these grids are missing. Compute how many
+		possible (shortest) paths are there from the top-left corner to the
+		bottom-right corner. </FONT>
+		</P>
+		<P><FONT SIZE=3><B>Comment:</B> Assuming that N and M can be quite
+		large, the straightforward approach of maintaining a 2D table may
+		not be feasible and it is not memory efficient to store the missing
+		edges in a sparse adjacency matrix. </FONT>
+		</P>
+		<P><FONT SIZE=3><B>Code: </B><SPAN STYLE="font-weight: normal">There
+		are three versions of the code, the first uses a 2D O(MN) table,
+		the second maintain the current two O(M) rows that we are
+		processing. The last maintain only 1 row. <A HREF="dynamicProgramming">Code
+		is available here</A>.</SPAN></FONT></P>
 	</OL>
 	<LI><P><FONT SIZE=3><B>Recursion, Depth(or Breath)-first-search</B></FONT><FONT SIZE=3>:
 	</FONT>
@@ -204,36 +230,10 @@ lower-bound. </FONT>
 	simple solution is the following. </FONT>
 	</P>
 	<OL>
-		<P><FONT SIZE=3><B>Problem:</B> A vector with a specific number
-		occurring more than half of the time.</FONT></P>
-	</OL>
-	<LI><P><FONT SIZE=3><B>Dynamic Programming</B>: In a nutshell,
-	dynamic programming starts with solutions for the trivial cases (i,e
-	boundary condition) and subsequently, extend the partial solution to
-	even larger partial solution (using a recurrence relation) until we
-	solved the entire problem. It involves maintaining a data structure,
-	typically in the form of an array (could be 1D, 2D, 3D, etc).
-	Sometime the data structure could be a tree, a triangular matrix, or
-	a graph with partial (linear) order. </FONT>
-	</P>
-	<OL>
-		<P><FONT SIZE=3><B>Problem: </B>Given a NxM rectangular grid, a
-		robot can travel from a cell to a neighboring cells. However, a
-		small number of edges in these grids are missing. Compute how many
-		possible (shortest) paths are there from the top-left corner to the
-		bottom-right corner. </FONT>
-		</P>
-		<P><FONT SIZE=3><B>Comment:</B> Assuming that N and M can be quite
-		large, the straightforward approach of maintaining a 2D table may
-		not be feasible and it is not memory efficient to store the missing
-		edges in a sparse adjacency matrix. </FONT>
-		</P>
-		<P><FONT SIZE=3><B>Code: </B>There are three versions of the code,
-		the first uses a 2D O(MN) table, the second maintain the current
-		two O(M) rows that we are processing. The last maintain only 1 row.
-		</FONT>
-		</P>
+		<P><FONT SIZE=3><B>Problem:</B> TBA.</FONT></P>
 	</OL>
 </OL>
+<P><BR><BR>
+</P>
 </BODY>
 </HTML>

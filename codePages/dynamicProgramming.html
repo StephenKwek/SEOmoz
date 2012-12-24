@@ -1,0 +1,169 @@
+<html>
+<head>
+<style>
+.keyword{color:rgb(0,0,255);}
+.comment{color:rgb(0,128,0);}
+.pp{color:rgb(0,0,255);}
+</style>
+<body>
+<pre style="font-family:courier;font-size:10pt"><span class=pp>#include</span> &lt;set&gt;
+<span class=pp>#include</span> &lt;vector&gt;
+<span class=pp>#include</span> &lt;iostream&gt;
+
+<span class=keyword>using</span> <span class=keyword>namespace</span> std;
+
+<span class=comment>/**
+    Given a M x N rectangular with some obstacle in some nodes. How many unique
+    paths are there from the top left to bottom right corner? Some of the cells have 
+    obstacle which prevent one from passing through it. 
+
+    Three dynamic programming solutions of increasing efficiency is precented here. 
+    Here, A[i][j] is the number of unique paths from cell(0,0) to cell(i,j). 
+
+    The solution is to compute the easy partial solution along the first row and then extend
+    the solution to the next row until we completely filled up the matrix A. Once it is 
+    filled, the solution is just at the right-bottom cell of A. 
+**/</span>
+<span class=comment>// O(M*N) Space version
+</span><span class=keyword>int</span> numUniquePaths_2D(<span class=keyword>const</span> set&lt;pair&lt;<span class=keyword>int</span>, <span class=keyword>int</span>&gt;&gt; obstacles, <span class=keyword>const</span> <span class=keyword>int</span> N, <span class=keyword>const</span> <span class=keyword>int</span> M)
+{
+    vector&lt;vector&lt;<span class=keyword>int</span>&gt;&gt; A (N, vector&lt;<span class=keyword>int</span>&gt; (M, 0));
+    
+    <span class=comment>// fill in the boundary condition along the first row
+</span>    A[0][0] = 1;
+    pair&lt;<span class=keyword>int</span>, <span class=keyword>int</span>&gt; cell = make_pair(0,0);
+    <span class=keyword>for</span> (<span class=keyword>int</span> i = 1; i &lt; M; i++) {
+        cell.first = 0;
+        cell.second = i;
+        <span class=keyword>if</span> (obstacles.find(cell) == obstacles.end())
+            A[0][i] = 1;
+        <span class=keyword>else</span>
+            <span class=keyword>break</span>;
+    }
+    
+    <span class=keyword>for</span> (<span class=keyword>int</span> i = 1; i &lt; N; i++) {
+        cell.first = i;
+        cell.second = 0;
+        <span class=keyword>if</span> (obstacles.find(cell) == obstacles.end())
+            A[i][0] = 1;
+        <span class=keyword>else</span>
+            <span class=keyword>break</span>; 
+    }
+                 
+    <span class=comment>/**
+     fill up the table
+     **/</span>
+    <span class=keyword>for</span> (<span class=keyword>int</span> i = 1; i &lt; N; i++)
+        <span class=keyword>for</span> (<span class=keyword>int</span> j = 1; j &lt; M; j++) {
+            pair&lt;<span class=keyword>int</span>, <span class=keyword>int</span>&gt; cell = make_pair(i,j);
+            <span class=keyword>if</span> (obstacles.find(cell) == obstacles.end())
+                A[i][j] += A[i-1][j] + A[i][j-1];
+        }
+        
+    <span class=keyword>return</span> A[N-1][M-1];
+        
+}
+
+
+<span class=comment>/** 
+    space optimized version: Here we only need to keep track of previous and currow 
+    rows that we need in the current iterations. 
+**/</span>
+<span class=keyword>int</span> numUniquePaths_2Rows(set&lt;pair&lt;<span class=keyword>int</span>, <span class=keyword>int</span>&gt;&gt; obstacles, <span class=keyword>const</span> <span class=keyword>int</span> N, <span class=keyword>const</span> <span class=keyword>int</span> M)
+{
+    vector&lt;<span class=keyword>int</span>&gt; pre (M, 0);
+    
+    <span class=comment>// fill in the boundary condition along the first row
+</span>    <span class=keyword>int</span> curRowNumber = 0;
+    pair&lt;<span class=keyword>int</span>, <span class=keyword>int</span>&gt; cell = make_pair(0,0); 
+    pre[0] = 1;
+    <span class=keyword>for</span> (<span class=keyword>int</span> i = 1; i &lt; M; i++) {
+        cell.first = 0;
+        cell.second = i;
+        <span class=keyword>if</span> (obstacles.find(cell) == obstacles.end())
+            pre[i] = 1;
+        <span class=keyword>else</span>
+            <span class=keyword>break</span>;
+    }
+
+    <span class=comment>/**
+     maintain the solution in the previous and current rows.
+     **/</span>
+    vector&lt;<span class=keyword>int</span>&gt; cur (M,0);    
+    <span class=keyword>while</span> (curRowNumber &lt; N-1) {
+        curRowNumber++;
+        <span class=keyword>for</span> (<span class=keyword>int</span> j = 0; j &lt; M; j++) {
+             cell.first = curRowNumber;
+             cell.second = j;
+             cur[j] = 0;
+             <span class=keyword>if</span> (obstacles.find(cell) == obstacles.end())
+                cur[j] += pre[j];
+             <span class=keyword>if</span> (j != 0 &amp;&amp; (obstacles.find(cell) == obstacles.end()))
+                cur[j] +=cur[j-1]; 
+        }
+        swap(pre, cur);
+    }  
+                         
+    <span class=keyword>return</span> pre[M-1];   
+}
+
+
+<span class=comment>/* the previous solution keep tracks of two rows of information. However, at any point
+   in time, we only need to keep track of the &quot;right-portion&quot; of the previous row and the
+   &quot;left-portion&quot; of the current row. */</span>
+<span class=keyword>int</span> numUniquePaths_1Row(set&lt;pair&lt;<span class=keyword>int</span>, <span class=keyword>int</span>&gt;&gt; obstacles, <span class=keyword>const</span> <span class=keyword>int</span> N, <span class=keyword>const</span> <span class=keyword>int</span> M)
+{
+    vector&lt;<span class=keyword>int</span>&gt; V (M, 0);
+    V[0] = 1; 
+    <span class=keyword>int</span> row = 0;
+
+    <span class=comment>// process the first row
+</span>    pair&lt;<span class=keyword>int</span>, <span class=keyword>int</span>&gt; cell = make_pair(0,0);
+    <span class=keyword>for</span> (<span class=keyword>int</span> i = 1; i &lt; M; i++) {
+        cell.first = 0;
+        cell.second = i;
+        <span class=keyword>if</span> (obstacles.find(cell) == obstacles.end())
+            V[i] = 1;
+        <span class=keyword>else</span>
+            <span class=keyword>break</span>;
+    }
+
+    <span class=comment>/* keep track and maintain the &quot;right-portion&quot; of the previous row and the
+       &quot;left-portion&quot; of the current row. 
+    */</span>
+    row = 1;
+    <span class=keyword>for</span> (; row &lt; N; row++) {
+        <span class=keyword>for</span> (<span class=keyword>int</span> col = 0; col &lt; M; col++) {
+             cell.first = row;
+             cell.second = col;
+
+             <span class=keyword>int</span> cur = 0;
+             <span class=keyword>if</span> (obstacles.find(cell) == obstacles.end())
+                cur += V[col];
+             <span class=keyword>if</span> (col != 0 &amp;&amp; (obstacles.find(cell) == obstacles.end()))
+                cur +=V[col-1]; 
+             V[col] = cur;
+        }
+    }
+                         
+    <span class=keyword>return</span> V[M-1];     
+}
+
+<span class=keyword>void</span> main() {
+    set&lt;pair&lt;<span class=keyword>int</span>, <span class=keyword>int</span>&gt;&gt; obstacles;
+    cout &lt;&lt; numUniquePaths_2D(obstacles, 3, 3) &lt;&lt; endl;
+    cout &lt;&lt; numUniquePaths_2Rows(obstacles, 3, 3) &lt;&lt; endl;
+    cout &lt;&lt; numUniquePaths_1Row(obstacles, 3, 3) &lt;&lt; endl;
+
+    obstacles.insert(make_pair(1, 1));
+    cout &lt;&lt; numUniquePaths_2D(obstacles, 4, 4) &lt;&lt; endl;
+    cout &lt;&lt; numUniquePaths_2Rows(obstacles, 4, 4) &lt;&lt; endl;
+    cout &lt;&lt; numUniquePaths_1Row(obstacles, 4, 4) &lt;&lt; endl;
+
+    obstacles.insert(make_pair(2, 3));
+    cout &lt;&lt; numUniquePaths_2D(obstacles, 5, 5) &lt;&lt; endl;
+    cout &lt;&lt; numUniquePaths_2Rows(obstacles, 5, 5) &lt;&lt; endl;
+    cout &lt;&lt; numUniquePaths_1Row(obstacles, 5, 5) &lt;&lt; endl;
+}
+</pre></body>
+</html>
