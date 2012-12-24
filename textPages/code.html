@@ -3,11 +3,12 @@
 <HEAD>
 	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
 	<TITLE>CODE SAMPLE</TITLE>
+	<meta name="robots" content="noindex">
 	<META NAME="GENERATOR" CONTENT="LibreOffice 3.5  (Linux)">
 	<META NAME="AUTHOR" CONTENT="Stephen Kwek">
 	<META NAME="CREATED" CONTENT="20121222;16173200">
 	<META NAME="CHANGEDBY" CONTENT="Stephen Kwek">
-	<META NAME="CHANGED" CONTENT="20121224;11205000">
+	<META NAME="CHANGED" CONTENT="20121224;11484600">
 	<META NAME="robots" CONTENT="noindex">
 	<META NAME="CHANGEDBY" CONTENT="Stephen Kwek">
 	<META NAME="CHANGEDBY" CONTENT="Stephen Kwek">
@@ -20,10 +21,8 @@ Samples</FONT></FONT></P>
 coding questions (as can be found in glassdoor.com) can be
 categorized into the following topics. I have identified one or two
 problems that are either more challenging or most representative of
-each topic and have written some code for it. The code are written in
-C. Topics 10 has no code but has an interesting discussion on a
-problem involving optimizating the worst case to get good
-lower-bound. </FONT>
+each topic and have written some code for it. The code are mostly
+written in C/C++ and a couple of python code fragments. </FONT>
 </P>
 <OL>
 	<LI><P><FONT SIZE=3><B>Binary Search</B>: Binary search is a common
@@ -40,13 +39,13 @@ lower-bound. </FONT>
 	<P><FONT SIZE=3><B>Comment:</B> Without the restriction, one could
 	simply use Newton-Raphspn method or binary search on the line 2^y by
 	searching for 2^y ~ c. With this restriction, instead of performing
-	binary search on the line 2^y, we perform search on y = log(2^y) by
-	making use of the fact that on the line y, the mid-point of y_1 and
-	y_2 corresponds to (log(2^y_1) + log(2^y_2))/2 = log(2^y_1 *
-	2^y_2)/2 = sqrt(y_1*y_2). Effectively, instead of doing an
-	'even-split search with mid-point (y_1 + y_2)/2, we have the
-	mid-point being sqrt(y_1 * y_2). </FONT>
-	</P>
+	binary search on the line 2^y, we perform search on the line
+	log(2^y) by making use of the fact that on the line y, the mid-point
+	of y_1 and y_2 corresponds to (log(2^y_1) + log(2^y_2))/2 =
+	log(2^y_1 * 2^y_2)/2 = sqrt(y_1*y_2). Effectively, instead of doing
+	an 'even-split search with mid-point (y_1 + y_2)/2 as in standard
+	binary search, we have the mid-point being sqrt(y_1 * y_2) by
+	transforming the search space.</FONT></P>
 	<P><FONT SIZE=3><B>Code:</B></FONT><FONT SIZE=3> <A HREF="log2">available
 	here</A>. </FONT>
 	</P>
@@ -55,8 +54,10 @@ lower-bound. </FONT>
 	asked to produce an optimal solution that consists of either a
 	single (or a pair of ) instance of the array, or a subarray that
 	produces some optimum measure. The typical approach is to initialize
-	the current best solution as you scan from 'left to right', and when
-	a better solution is found, update the best solution. </FONT>
+	the current best solution for the first item. As you scan from 'left
+	to right', when a better solution is found, update the best
+	solution. A good source of discussion is the classic Jon Louis
+	Bentley's book “Programming Pearls”. </FONT>
 	</P>
 	<OL>
 		<P><FONT SIZE=3><B>Problem:</B> Given the price of a given stock at
@@ -73,8 +74,8 @@ lower-bound. </FONT>
 		values. They are  updated as we scan the next element. </FONT></FONT>
 		</P>
 		<LI><P STYLE="font-weight: normal"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>When
-		we have a new max value, we check if current max - current min is
-		greater than the 'bestSoFar'. </FONT></FONT>
+		we have a new max value, we check if (current max - current min) is
+		greater than the best solution found so far. </FONT></FONT>
 		</P>
 		<LI><P STYLE="font-weight: normal"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>When
 		we have a new min value, we start all over by also setting max to
@@ -85,18 +86,19 @@ lower-bound. </FONT>
 	</OL>
 	<LI><P><FONT SIZE=3><B>Dynamic Programming</B>: In a nutshell,
 	dynamic programming starts with solutions for the trivial cases (i,e
-	boundary condition) and subsequently, extend the partial solution to
-	even larger partial solution (using a recurrence relation) until we
-	solved the entire problem. It involves maintaining a data structure,
-	typically in the form of an array (could be 1D, 2D, 3D, etc).
-	Sometime the data structure could be a tree, a triangular matrix, or
-	a graph with partial (linear) order. </FONT>
+	boundary condition) and subsequently, extend the partial solutions
+	to set of even larger partial solutions (using a recurrence
+	relation) until we solved the entire problem. It involves
+	maintaining a data structure, typically in the form of an array
+	(could be 1D, 2D, 3D, etc). Sometime the data structure could be a
+	tree, a triangular matrix, or a graph with partial (linear) order. </FONT>
 	</P>
 	<OL>
-		<P><FONT SIZE=3><B>Problem: </B>Given a NxM rectangular grid, a
-		robot can travel from a cell to a neighboring cells. However, a
-		small number of edges in these grids are missing. Compute how many
-		possible (shortest) paths are there from the top-left corner to the
+		<P><FONT SIZE=3><B>Problem: </B><SPAN STYLE="font-weight: normal">On</SPAN>
+		a NxM rectangular grid, a robot can travel from a node to a
+		neighboring node. However, some of the nodes have obstacles on it
+		that the robot cannot pass through. Compute how many possible
+		(shortest) unique paths are there from the top-left corner to the
 		bottom-right corner. </FONT>
 		</P>
 		<P><FONT SIZE=3><B>Comment:</B> Assuming that N and M can be quite
@@ -105,8 +107,8 @@ lower-bound. </FONT>
 		edges in a sparse adjacency matrix. </FONT>
 		</P>
 		<P><FONT SIZE=3><B>Code: </B><SPAN STYLE="font-weight: normal">There
-		are three versions of the code, the first uses a 2D O(MN) table,
-		the second maintain the current two O(M) rows that we are
+		are three versions of the code, The first uses a 2D O(MN) table.
+		The second maintain the current two O(M) rows that we are
 		processing. The last maintain only 1 row. <A HREF="dynamicProgramming">Code
 		is available here</A>.</SPAN></FONT></P>
 	</OL>
@@ -135,13 +137,13 @@ lower-bound. </FONT>
 	serialization and deserialization, finding the shortest height of
 	the tree, etc. Most of the solutions to these problems involved
 	recursion. I pick the following problem as it is a good
-	representation of this type of problems. </SPAN></FONT>
+	representation of this class of problems. </SPAN></FONT>
 	</P>
 	<OL>
 		<P STYLE="font-weight: normal"><FONT SIZE=3><B>Problem:</B> Given a
 		binary-tree, determine if it is a valid binary search tree. A bonus
-		point is to check that it is indeed a tree (a tree is a graph with
-		all nodes connected but without cycle). </FONT>
+		point is to check that it is indeed a tree (a tree is a graph where
+		all the nodes connected but without cycle). </FONT>
 		</P>
 		<P STYLE="font-weight: normal"><FONT SIZE=3><B>Comment:</B> There
 		are a number of ways to solve this. My favorite is to use the fact
@@ -184,7 +186,9 @@ lower-bound. </FONT>
 		<P><FONT SIZE=3><B>Comment: </B>For a given N, gray code is
 		uniquely defined (subject to rotation). </FONT>
 		</P>
-		<P><FONT SIZE=3><B>Code:</B> (python)</FONT></P>
+		<P><FONT SIZE=3><B>Code:</B> The following python code does it. It
+		is somewhat 'shorter' than if I were to write it in C/C++ (or Java)
+		because of python's list comprehension capability.</FONT></P>
 		<OL>
 			<P><FONT FACE="Courier New, monospace"><FONT SIZE=3>def
 			grayCode(n):</FONT></FONT></P>
@@ -226,11 +230,11 @@ lower-bound. </FONT>
 	</OL>
 	<LI><P><FONT SIZE=3><B>Sorting, (linear) Search and Merging</B>:
 	Most of the questions in this category seem to be straight from the
-	textbook, some with slight variation. A cute problem with short
-	simple solution is the following. </FONT>
+	textbook, some with slight variation. </FONT>
 	</P>
 	<OL>
-		<P><FONT SIZE=3><B>Problem:</B> TBA.</FONT></P>
+		<P><FONT SIZE=3><B>Problem:</B> TBA. Have not seen something much
+		different from textbook cases.</FONT></P>
 	</OL>
 </OL>
 <P><BR><BR>
