@@ -2,186 +2,213 @@
 <HTML>
 <HEAD>
 	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
-	<TITLE></TITLE>
+	<TITLE>CODE SAMPLE</TITLE>
 	<META NAME="GENERATOR" CONTENT="LibreOffice 3.5  (Linux)">
 	<META NAME="AUTHOR" CONTENT="Stephen Kwek">
 	<META NAME="CREATED" CONTENT="20121222;16173200">
 	<META NAME="CHANGEDBY" CONTENT="Stephen Kwek">
-	<META NAME="CHANGED" CONTENT="20121223;21540500">
+	<META NAME="CHANGED" CONTENT="20121224;3552200">
+	<META NAME="robots" CONTENT="noindex">
+	<META NAME="CHANGEDBY" CONTENT="Stephen Kwek">
+	<META NAME="CHANGEDBY" CONTENT="Stephen Kwek">
 	<META NAME="CHANGEDBY" CONTENT="Stephen Kwek">
 </HEAD>
 <BODY LANG="en-US" DIR="LTR">
 <P ALIGN=CENTER STYLE="margin-top: 0.17in; page-break-after: avoid"><FONT FACE="Albany, sans-serif"><FONT SIZE=4>Code
 Samples</FONT></FONT></P>
-<P>The types of typical software developer interview coding questions
-(as can be found in glassdoor.com) can be categorized into the
-following topics. I have identified one or two problems that are
-either more challenging or most representative of each topic and have
-written some code for it. The code are written in C. Topics 10 has no
-code but has an interesting discussion on a problem involving
-optimizating the worst case to get good lower-bound. 
+<P><FONT SIZE=3>The types of typical software developer interview
+coding questions (as can be found in glassdoor.com) can be
+categorized into the following topics. I have identified one or two
+problems that are either more challenging or most representative of
+each topic and have written some code for it. The code are written in
+C. Topics 10 has no code but has an interesting discussion on a
+problem involving optimizating the worst case to get good
+lower-bound. </FONT>
 </P>
 <OL>
-	<LI><P><B>Binary Search</B>: Binary search is a common question, be
-	it standard binary search, (STL) lowerbound, upperbound and range
-	algorithms, binary search on two or more sorted arrays, etc. A more
-	challenging question in this topic is the following, which I would
-	encourage you to take sometime to think about it before looking at
-	the comment or code. 
+	<LI><P><FONT SIZE=3><B>Binary Search</B>: Binary search is a common
+	question, be it standard binary search, (STL) lowerbound, upperbound
+	and range algorithms, binary search on two or more sorted arrays,
+	etc. A more challenging question in this topic is the following,
+	which I would encourage you to take sometime to think about it
+	before looking at the comment or code. </FONT>
 	</P>
-	<P>Problem: Implement log_2 using square root only. In other words,
-	given a constant c, we want to find y s.t. 2^y – c = 0. 
+	<P><FONT SIZE=3>Problem: Implement log_2 using square root only. In
+	other words, given a constant c, we want to find y s.t. 2^y – c =
+	0. </FONT>
 	</P>
-	<P>Comment: Without the restriction, one could simply use
-	Newton-Raphspn method or binary search on the line 2^y by searching
-	for 2^y ~ c. With this restriction, instead of performing binary
-	search on the line 2^y, we perform search on y = log(2^y) by making
-	use of the fact that on the line y, the mid-point of y_1 and y_2
-	corresponds to (log(2^y_1) + log(2^y_2))/2 = log(2^y_1 * 2^y_2)/2 =
-	sqrt(y_1*y_2). Effectively, instead of doing an 'even-split search
-	with mid-point (y_1 + y_2)/2, we have the mid-point being sqrt(y_1 *
-	y_2). 
+	<P><FONT SIZE=3>Comment: Without the restriction, one could simply
+	use Newton-Raphspn method or binary search on the line 2^y by
+	searching for 2^y ~ c. With this restriction, instead of performing
+	binary search on the line 2^y, we perform search on y = log(2^y) by
+	making use of the fact that on the line y, the mid-point of y_1 and
+	y_2 corresponds to (log(2^y_1) + log(2^y_2))/2 = log(2^y_1 *
+	2^y_2)/2 = sqrt(y_1*y_2). Effectively, instead of doing an
+	'even-split search with mid-point (y_1 + y_2)/2, we have the
+	mid-point being sqrt(y_1 * y_2). </FONT>
 	</P>
-	<P>Code: <A HREF="log2">available here</A>. 
+	<P><FONT SIZE=3>Code: <A HREF="log2">available here</A>. </FONT>
 	</P>
-	<LI><P><B>Linear Sweep</B> (including Greedy algorithms): Here, we
-	are usually given an array of numbers and asked to produce an
-	optimal solution that consists of either a single (or a pair of )
-	instance of the array, or a subarray that produces some optimum
-	measure. The typical approach is to initialize the current best
-	solution as you scan from 'left to right', and when a better
-	solution is found, update the best solution. 
+	<LI><P><FONT SIZE=3><B>Linear Sweep</B> (including Greedy
+	algorithms): Here, we are usually given an array of numbers and
+	asked to produce an optimal solution that consists of either a
+	single (or a pair of ) instance of the array, or a subarray that
+	produces some optimum measure. The typical approach is to initialize
+	the current best solution as you scan from 'left to right', and when
+	a better solution is found, update the best solution. </FONT>
 	</P>
 	<OL>
-		<P>Problem: Given the price of a given stock at da<SPAN STYLE="font-weight: normal">y
+		<P><FONT SIZE=3>Problem: Given the price of a given stock at da<SPAN STYLE="font-weight: normal">y
 		i,</SPAN> find the best time to sell and buy stock. You are only
 		permitted to complete at most one transaction (buy the stock and
-		then sell it later, no shorting). 
+		then sell it later, no shorting). </FONT>
 		</P>
-		<P>Comment: 
+		<P><FONT SIZE=3>Comment: </FONT>
 		</P>
-		<P>Code: <A HREF="stock">available here</A>.</P>
+		<P><FONT SIZE=3>Code: <A HREF="stock">available here</A>.</FONT></P>
 	</OL>
-	<LI><P><B>Dynamic Programming</B>: In a nutshell, dynamic
-	programming starts with solutions for the trivial cases (i,e
+	<LI><P><FONT SIZE=3><B>Dynamic Programming</B>: In a nutshell,
+	dynamic programming starts with solutions for the trivial cases (i,e
 	boundary condition) and subsequently, extend the partial solution to
 	even larger partial solution (using a recurrence relation) until we
 	solved the entire problem. It involves maintaining a data structure,
 	typically in the form of an array (could be 1D, 2D, 3D, etc).
 	Sometime the data structure could be a tree, a triangular matrix, or
-	a graph with partial (linear) order. 
+	a graph with partial (linear) order. </FONT>
 	</P>
 	<OL>
-		<P>Problem: Given a NxM rectangular grid, a robot can travel from a
-		cell to a neighboring cells. However, a small number of edges in
-		these grids are missing. Compute how many possible (shortest) paths
-		are there from the top-left corner to the bottom-right corner. 
+		<P><FONT SIZE=3>Problem: Given a NxM rectangular grid, a robot can
+		travel from a cell to a neighboring cells. However, a small number
+		of edges in these grids are missing. Compute how many possible
+		(shortest) paths are there from the top-left corner to the
+		bottom-right corner. </FONT>
 		</P>
-		<P>Comment: Assuming that N and M can be quite large, the
-		straightforward approach of maintaining a 2D table may not be
+		<P><FONT SIZE=3>Comment: Assuming that N and M can be quite large,
+		the straightforward approach of maintaining a 2D table may not be
 		feasible and it is not memory efficient to store the missing edges
-		in a sparse adjacency matrix. 
+		in a sparse adjacency matrix. </FONT>
 		</P>
-		<P>Code: There are three versions of the code, the first uses a 2D
-		O(MN) table, the second maintain the current two O(M) rows that we
-		are processing. The last maintain only 1 row. 
+		<P><FONT SIZE=3>Code: There are three versions of the code, the
+		first uses a 2D O(MN) table, the second maintain the current two
+		O(M) rows that we are processing. The last maintain only 1 row. </FONT>
 		</P>
 	</OL>
-	<LI><P><B>Recursion, Depth(or Breath)-first-search</B>: 
+	<LI><P><FONT SIZE=3><B>Recursion, Depth(or Breath)-first-search</B>:
+	</FONT>
 	</P>
 	<OL>
-		<P>Problem: Given an NxN 'chessboard', find a placement of N queen
-		so that none of them can hit each other. You function should takes
-		in N and printout the queen placement if it is possible.</P>
-		<P>Comment: A queen can dominate a row, a column, a diagonal from
-		top-left to bottom right (denote it as tl_br) or top-right to
-		bottom-left (denote it as tr-bl). For a queen at position (i, j),
-		we say it dominates the (i+j) tl_br diagonal and (N-1-i+j) tr_bl
-		diagonal. Further, for efficiency, we do not need to create the
-		entire NxN board as we are processing the rows from top to bottom.
-		We 'just need' to keep track of which column we placed the queen.</P>
-		<P>Code: available here. 
+		<P><FONT SIZE=3>Problem: Given an NxN 'chessboard', find a
+		placement of N queen so that none of them can hit each other. You
+		function should takes in N and printout the queen placement if it
+		is possible.</FONT></P>
+		<P><FONT SIZE=3>Comment: A queen can dominate a row, a column, a
+		diagonal from top-left to bottom right (denote it as tl_br) or
+		top-right to bottom-left (denote it as tr-bl). For a queen at
+		position (i, j), we say it dominates the (i+j) tl_br diagonal and
+		(N-1-i+j) tr_bl diagonal. Further, for efficiency, we do not need
+		to create the entire NxN board as we are processing the rows from
+		top to bottom. We 'just need' to keep track of which column we
+		placed the queen.</FONT></P>
+		<P><FONT SIZE=3>Code: <A HREF="nQueen">available here</A>. </FONT>
 		</P>
 	</OL>
-	<LI><P><B>Binary-tree Manipulation: </B><SPAN STYLE="font-weight: normal">Examples
+	<LI><P><FONT SIZE=3><B>Binary-tree Manipulation: </B><SPAN STYLE="font-weight: normal">Examples
 	are tree-traveral, transforming tree from one type to another,
 	serialization and deserialization, finding the shortest height of
 	the tree, etc. Most of the solutions to these problems involved
 	recursion. I pick the following problem as it is a good
-	representation of this type of problems. </SPAN>
+	representation of this type of problems. </SPAN></FONT>
 	</P>
 	<OL>
-		<P STYLE="font-weight: normal">Problem: Given a binary-tree,
-		determine if it is a valid binary search tree. A bonus point is to
-		check that it is indeed a tree (a tree is a graph with all nodes
-		connected but without cycle). 
+		<P STYLE="font-weight: normal"><FONT SIZE=3>Problem: Given a
+		binary-tree, determine if it is a valid binary search tree. A bonus
+		point is to check that it is indeed a tree (a tree is a graph with
+		all nodes connected but without cycle). </FONT>
 		</P>
-		<P STYLE="font-weight: normal">Comment: There are a number of ways
-		to solve this. My favorite is to use the fact that if the
-		binary-tree is indeed a binary search tree than the values of the
-		nodes visited in an in-order traversal are in monotonically
-		increasing order. 
+		<P STYLE="font-weight: normal"><FONT SIZE=3>Comment: There are a
+		number of ways to solve this. My favorite is to use the fact that
+		if the binary-tree is indeed a binary search tree than the values
+		of the nodes visited in an in-order traversal are in monotonically
+		increasing order. </FONT>
 		</P>
-		<P STYLE="font-weight: normal">Code: <A HREF="checkBST">available
-		here</A>.</P>
+		<P><FONT SIZE=3><SPAN STYLE="font-weight: normal">Code: <A HREF="checkBST">available
+		here</A>.</SPAN></FONT></P>
 	</OL>
-	<LI><P><B>String Parsing</B>: write a simple regular expression
-	matcher, evaluation of arithmetic expression, palindrome-related
-	questions. 
+	<LI><P><FONT SIZE=3><B>String Parsing</B>: write a simple regular
+	expression matcher, evaluation of arithmetic expression,
+	palindrome-related questions. </FONT>
 	</P>
 	<OL>
-		<P>Problem: Write a simple pattern matching function that match '.'
-		to any single character and '*' to any normal of the preceding
-		characters. Example match(“aa”, “a”), match(“aaa”,”aa”)
-		return false, while match (“aaab”, “a*a*b”) and
-		match(“aaaba”, “a*.a”) return true.</P>
-		<P>Code: <A HREF="matchPattern">available here</A>.</P>
-		<P>Another interesting problem that written in C/C++ will take a
-		few lines but in python is a one liner. 
+		<P><FONT SIZE=3>Problem: Write a simple pattern matching function
+		that match '.' to any single character and '*' to any normal of the
+		preceding characters. Example match(“aa”, “a”),
+		match(“aaa”,”aa”) return false, while match (“aaab”,
+		“a*a*b”) and match(“aaaba”, “a*.a”) return true.</FONT></P>
+		<P><FONT SIZE=3>Code: <A HREF="matchPattern">available here</A>.</FONT></P>
+		<P><FONT SIZE=3>Another interesting problem that written in C/C++
+		will take a few lines but in python is a one liner. </FONT>
 		</P>
-		<P>Code: ' '.join([w[::-1] for w in line.split(' ')])</P>
+		<P><FONT SIZE=3>Problem: Give a string say “This is an example”,
+		reverse each word in the string to obtain “sihT si na elpmaxe”.</FONT></P>
+		<P><FONT SIZE=3>Code: ' '.join([w[::-1] for w in line.split(' ')])</FONT></P>
 	</OL>
-	<LI><P><B>Combinatorial Enumeration</B>: powerset, permutation and
-	combinatrion with/with item duplications. My favorite is 
+	<LI><P><FONT SIZE=3><B>Combinatorial Enumeration</B>: powerset,
+	permutation and combination with/with item duplications. My favorite
+	is </FONT>
 	</P>
 	<OL>
-		<P>Problem (Gray Code): Enumerate all length N {0,1}-string such
-		that consecutive strings differ by only 1-bit. 
+		<P><FONT SIZE=3>Problem (Gray Code): Enumerate all length N
+		{0,1}-string such that consecutive strings differ by only 1-bit. </FONT>
 		</P>
-		<P>Comment: For a given N, gray code is uniquely defined (subject
-		to rotation). 
+		<P><FONT SIZE=3>Comment: For a given N, gray code is uniquely
+		defined (subject to rotation). </FONT>
 		</P>
-		<P>Code: available here. 
-		</P>
+		<P><FONT SIZE=3>Code: (python)</FONT></P>
+		<OL>
+			<P><FONT FACE="Courier New, monospace"><FONT SIZE=3>def
+			grayCode(n):</FONT></FONT></P>
+			<OL>
+				<P><FONT FACE="Courier New, monospace"><FONT SIZE=3>if (n == 0):</FONT></FONT></P>
+				<OL>
+					<P><FONT FACE="Courier New, monospace"><FONT SIZE=3>return [“”]</FONT></FONT></P>
+				</OL>
+				<P><FONT FACE="Courier New, monospace"><FONT SIZE=3>lowerD =
+				grayCode(n-1)</FONT></FONT></P>
+				<P><FONT FACE="Courier New, monospace"><FONT SIZE=3>return [s +
+				&quot;0&quot; for s in reversed(lowD)] + [s + &quot;1&quot; for s
+				in lowD]</FONT></FONT></P>
+			</OL>
+		</OL>
 	</OL>
-	<LI><P><B>Bit Manipulation</B>: Normally, involve writing a 1 liner
-	code (or few lines), say to determine if a binary string represents
-	an integer of power of 2. A problem slightly related to bit
-	manipulation is 
+	<LI><P><FONT SIZE=3><B>Bit Manipulation</B>: Normally, involve
+	writing a 1 liner code (or few lines), say to determine if a binary
+	string represents an integer of power of 2. A problem slightly
+	related to bit manipulation is </FONT>
 	</P>
 	<OL>
-		<P>Problem: perform division without multiplication.</P>
-		<P>Code: available here.</P>
+		<P><FONT SIZE=3>Problem: perform division without multiplication.</FONT></P>
+		<P><FONT SIZE=3>Code: <A HREF="divide">available here</A>.</FONT></P>
 	</OL>
-	<LI><P><B>List (pointer) Manipulation</B>: basic linked list, double
-	linked list problems. The classic (attributed to MS I believe)
-	being:</P>
+	<LI><P><FONT SIZE=3><B>List (pointer) Manipulation</B>: basic linked
+	list, double linked list problems. The classic (attributed to MS I
+	believe) being:</FONT></P>
 	<OL>
-		<P>Problem: Given a linked list, determine if there is a loop.</P>
-		<P>Comment: The solution is to have a fast pointer traveling two
-		nodes in one iteration and one slow pointer traveling one node at a
-		time. If there is no loop, the fast pointer will fall off the list
-		whereas the 
+		<P><FONT SIZE=3>Problem: Given a linked list, determine if there is
+		a loop.</FONT></P>
+		<P><FONT SIZE=3>Comment: The solution is to have a fast pointer
+		traveling two nodes in one iteration and one slow pointer traveling
+		one node at a time. If there is no loop, the fast pointer will fall
+		off the list whereas the </FONT>
 		</P>
 	</OL>
-	<LI><P><B>Sorting, (linear) Search and Merging</B>: Most of the
-	questions in this category seem to be straight from the textbook,
-	some with slight variation. A cute problem with short simple
-	solution is the following. 
+	<LI><P><FONT SIZE=3><B>Sorting, (linear) Search and Merging</B>:
+	Most of the questions in this category seem to be straight from the
+	textbook, some with slight variation. A cute problem with short
+	simple solution is the following. </FONT>
 	</P>
 	<OL>
-		<P>Problem: A vector with a specific number occuring more than half
-		of the time.</P>
+		<P><FONT SIZE=3>Problem: A vector with a specific number occurring
+		more than half of the time.</FONT></P>
 	</OL>
 </OL>
 </BODY>
