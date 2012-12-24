@@ -1,0 +1,105 @@
+<!doctype html 1.1>
+<html>
+<head>
+<style>
+.keyword{color:rgb(0,0,255);}
+.comment{color:rgb(0,128,0);}
+.pp{color:rgb(0,0,255);}
+</style>
+<body>
+<pre style="font-family:courier;font-size:10pt"><span class=pp>#pragma</span> once
+<span class=pp>#include</span> &lt;set&gt;
+<span class=pp>#include</span> &lt;vector&gt;
+<span class=pp>#include</span> &lt;list&gt;
+<span class=pp>#include</span> &lt;iostream&gt;
+
+<span class=keyword>using</span> <span class=keyword>namespace</span> std;
+<span class=comment>/*
+8.    N-Queens
+The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other.
+Given an integer n, return all distinct solutions to the n-queens puzzle.
+Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' both indicate a queen and an empty space respectively.
+For example,
+There exist two distinct solutions to the 4-queens puzzle:
+[
+ [&quot;.Q..&quot;,  // Solution 1
+  &quot;...Q&quot;,
+  &quot;Q...&quot;,
+  &quot;..Q.&quot;],
+
+ [&quot;..Q.&quot;,  // Solution 2
+  &quot;Q...&quot;,
+  &quot;...Q&quot;,
+  &quot;.Q..&quot;]
+]
+*/</span>
+<span class=keyword>struct</span> Dominated {
+    set&lt;<span class=keyword>int</span>&gt; col;
+    set&lt;<span class=keyword>int</span>&gt; dig_TL_BR;
+    set&lt;<span class=keyword>int</span>&gt; dig_TR_BL;
+};
+
+
+<span class=keyword>void</span> NQueen(<span class=keyword>const</span> <span class=keyword>int</span> N, 
+            <span class=keyword>int</span> curRow, 
+            Dominated domPos,
+            vector&lt;<span class=keyword>int</span>&gt; &amp;placement, 
+            list&lt;vector&lt;<span class=keyword>int</span>&gt;&gt; &amp;result) {
+
+    <span class=keyword>if</span> (curRow == N) {
+        result.push_back(placement);
+        <span class=keyword>return</span>;
+    }
+
+    <span class=keyword>for</span> (<span class=keyword>int</span> j = 0; j &lt; N; j++) {
+        <span class=keyword>if</span> (domPos.col.find(j) == domPos.col.end() &amp;&amp; 
+            domPos.dig_TL_BR.find(j + curRow)  == domPos.dig_TL_BR.end() &amp;&amp; 
+            domPos.dig_TR_BL.find(N-1-j + curRow) == domPos.dig_TR_BL.end()) {
+
+            <span class=comment>// place the queen and update the dominated positions.
+</span>            placement.push_back(j);
+            domPos.col.insert(j);
+            domPos.dig_TL_BR.insert(j + curRow);
+            domPos.dig_TR_BL.insert(N - 1 - j + curRow);
+
+            <span class=comment>// make the next move in the next row
+</span>            NQueen(N, curRow + 1, domPos, placement, result);
+
+            <span class=comment>// undo placement of the queen and update the dominated positions. 
+</span>            placement.pop_back();
+            domPos.col.erase(j);
+            domPos.dig_TL_BR.erase(j + curRow);
+            domPos.dig_TR_BL.erase(N - 1 - j +curRow);
+        }
+    }
+}
+
+
+<span class=keyword>void</span> printResult(<span class=keyword>const</span> list&lt;vector&lt;<span class=keyword>int</span>&gt;&gt; &amp;result) {
+    <span class=keyword>for</span> (list&lt;vector&lt;<span class=keyword>int</span>&gt;&gt;::const_iterator p = result.begin(); p != result.end(); p++) {
+        vector&lt;<span class=keyword>int</span>&gt; soln = *p;
+        <span class=keyword>for</span> (size_t i = 0; i &lt; soln.size(); i++) {
+            cout &lt;&lt; &quot;\t&quot;;
+            <span class=keyword>for</span> (size_t j = 0; j &lt; soln.size(); j++) {
+                cout &lt;&lt; ((soln[i] == j) ? &quot;Q&quot; : &quot;.&quot;);
+            }
+            cout &lt;&lt; endl;
+        }
+        cout &lt;&lt; endl;
+    }
+}
+
+
+<span class=keyword>void</span> main() {
+    Dominated domPos;
+    vector&lt;<span class=keyword>int</span>&gt; placement;
+    list&lt;vector&lt;<span class=keyword>int</span>&gt;&gt; result;
+
+    NQueen(4, 0, domPos, placement, result);
+    printResult(result);
+
+    NQueen(5, 0, domPos, placement, result);
+    printResult(result);
+}
+</pre></body>
+</html>

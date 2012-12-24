@@ -1,0 +1,69 @@
+<!doctype html 1.1>
+<html>
+<head>
+<style>
+.keyword{color:rgb(0,0,255);}
+.comment{color:rgb(0,128,0);}
+.pp{color:rgb(0,0,255);}
+</style>
+<body>
+<pre style="font-family:courier;font-size:10pt"><span class=pp>#include</span> &lt;math.h&gt;
+<span class=pp>#include</span> &lt;iostream&gt;
+<span class=pp>#include</span> &lt;assert.h&gt;
+
+<span class=keyword>using</span> <span class=keyword>namespace</span> std;
+<span class=comment>// implement log_2 using sqrt only, assuming the input is at least 1.  
+</span><span class=comment>// Idea: 'index' binary search. For example, log_2(27). We know it is 
+</span><span class=comment>// between 4 and 5. 
+</span><span class=comment>//
+</span><span class=keyword>float</span> log_2(<span class=keyword>const</span> <span class=keyword>float</span> x, <span class=keyword>const</span> <span class=keyword>float</span> precision = 1.0e-006 )
+{
+    <span class=comment>// the left and right boundary of the normal-space
+</span>    <span class=keyword>float</span> leftVal = 1.0f, midVal, rightVal=2.0f;
+
+    <span class=comment>// the left and right boundary of the log-space
+</span>    <span class=keyword>float</span> left = 0.0f, mid, right=1.0f; 
+
+    <span class=comment>// determine the left and right boundary that contains log_2(x) s.t
+</span>    <span class=comment>// right - left = 1
+</span>    <span class=keyword>while</span> (x &gt; rightVal) 
+    {
+        right += 1;
+        rightVal *= 2;
+    }
+    left = right - 1;
+    leftVal = rightVal / 2;
+
+    midVal = sqrt(leftVal * rightVal);
+    mid = (left + right)/2;
+
+    <span class=comment>// perform the binary search in log-space while updating the 
+</span>    <span class=comment>// corresponding mid point in normal space.
+</span>    <span class=keyword>while</span> (rightVal - leftVal &gt; precision)
+    {
+        <span class=keyword>if</span> (midVal &lt; x)
+        {
+            left = mid; leftVal = midVal;
+        }
+        <span class=keyword>else</span>
+        {
+            right = mid; rightVal = midVal;
+        }    
+        midVal = sqrt(leftVal * rightVal);
+        mid = (left + right)/2;
+    }
+
+    <span class=keyword>return</span> mid;
+}
+
+
+<span class=keyword>void</span> main() {
+    <span class=keyword>const</span> <span class=keyword>float</span> log_e_2 = log(2.0f);
+    <span class=keyword>float</span> test[] = {1.0f, 1.4f, 2.0f, 3.0f, 4.0f, 6.5f};
+
+    <span class=keyword>for</span> (size_t i = 0; i &lt; 6 ; i++) {
+        assert(abs(log_2(test[i]) - log(test[i])/log_e_2) &lt; 1.0e-006);
+    }
+}
+</pre></body>
+</html>

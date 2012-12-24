@@ -1,0 +1,21 @@
+
+
+This is written using Python and web.py version 0.34 (see requirements.txt). The server code is in server.py and is quite short and straightfoward. 
+
+To run it locally, you need to:
+1. Make sure that web.py is installed. 
+2. simply do "python server.py ${PortNumber}". 
+
+FILE ORGANIZATION:
+The root directory contains three files:
+	server.py : the simple server python code. 
+	requirement.txt : consists of just a single line "web.py==0.34" telling Heroku to use web.py version 0.34.
+	Procfile: instruct Heruk
+	
+There are pages and source sample C++ codes are organized into 3 directories:
+1. textPages: it contains the following four pages:
+	cover.html : The cover letter for my SEOmoz job application. 
+	resume.html : My resume
+	code.html : This is a list of coding problems and links to the sample solution. It has a total of 10 topics.
+	index.html : This is the index pointing to different pages. 
+	

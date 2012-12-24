@@ -1,0 +1,103 @@
+<!doctype html 1.1>
+<html>
+<head>
+<style>
+.keyword{color:rgb(0,0,255);}
+.comment{color:rgb(0,128,0);}
+.pp{color:rgb(0,0,255);}
+</style>
+<body>
+<pre style="font-family:courier;font-size:10pt"><span class=pp>#include</span> &lt;vector&gt;
+<span class=pp>#include</span> &lt;iostream&gt;
+<span class=pp>#include</span> &lt;assert.h&gt;
+
+<span class=keyword>using</span> <span class=keyword>namespace</span> std;
+<span class=comment>/*
+Best Time to Buy and Sell Stock
+
+Say you have an array for which the ith element is the price of a given stock on day i.
+
+If you were only permitted to complete at most one transaction (ie, buy one and sell one share of the stock), 
+design an algorithm to find the maximum profit.
+
+The idea here is to 
+1. maintain a current min and current max. Initially both have A[0] as their values. They are 
+updated as we scan the next element. 
+2. When we have a new max value, we check if current max - current min is greater than the 'bestSoFar'. 
+3. When we have a new min value, we start all over by also setting max to the new min. 
+*/</span>
+pair&lt;<span class=keyword>int</span>, <span class=keyword>int</span>&gt; bestTimeToBuyAndSell(<span class=keyword>const</span> vector&lt;<span class=keyword>int</span>&gt; &amp;A)
+{
+    <span class=keyword>if</span> (A.empty()) {
+        <span class=keyword>return</span> make_pair(-1,-1);
+    }
+
+    <span class=keyword>int</span> curMin = 0;
+    <span class=keyword>int</span> curMax = 0;
+    <span class=keyword>int</span> start = 0;
+    <span class=keyword>int</span> end = 0;
+
+    <span class=keyword>for</span> (size_t i = 0; i &lt; A.size(); i++)
+    {
+        <span class=keyword>if</span> (A[i] &gt; A[curMax]) {
+            curMax = i;    
+            <span class=keyword>if</span> (A[curMax] - A[curMin] &gt;= A[end] - A[start])           
+            {
+                end=curMax;
+                start=curMin;
+            }
+        }
+        <span class=keyword>else</span> <span class=keyword>if</span> (A[i] &lt;= A[curMin])
+        {
+            curMin = i;
+            curMax = i;
+        }
+    }
+    <span class=keyword>return</span> make_pair(start, end);
+
+}
+
+
+<span class=keyword>void</span> main() {
+        
+    <span class=comment>// Case 1: test when the vector is empty
+</span>    vector&lt;<span class=keyword>int</span>&gt; V0;
+    pair&lt;<span class=keyword>int</span>, <span class=keyword>int</span>&gt; timing =  bestTimeToBuyAndSell(V0);
+    cout &lt;&lt; &quot;Case 0: Buy at &quot; &lt;&lt; timing.first &lt;&lt; &quot; sell at &quot; &lt;&lt; timing.second &lt;&lt; endl;
+    assert(timing.first == -1);
+    assert(timing.second == -1);
+        
+    <span class=comment>// Case 2: test when the vector only has 1 entry
+</span>    vector&lt;<span class=keyword>int</span>&gt; V1
+    V1.push_back(1);
+    timing =  bestTimeToBuyAndSell(V1);
+    cout &lt;&lt; &quot;Case 1: Buy at &quot; &lt;&lt; timing.first &lt;&lt; &quot; sell at &quot; &lt;&lt; timing.second &lt;&lt; endl;
+    assert(timing.first == 0);
+    assert(timing.second == 0);
+
+    <span class=comment>// Case 3: test when all entries have the same values
+</span>    <span class=keyword>int</span> tmp2[] = {1,1,1,1,1,1,1};    
+    vector&lt;<span class=keyword>int</span>&gt; V2 (tmp2, tmp2+7);
+    timing =  bestTimeToBuyAndSell(V2);
+    cout &lt;&lt; &quot;Case 2: Buy at &quot; &lt;&lt; timing.first &lt;&lt; &quot; sell at &quot; &lt;&lt; timing.second &lt;&lt; endl;
+    assert(timing.first == 0);
+    assert(timing.second == 0);
+
+    <span class=comment>// Case 4: test when the chart looks like a 'slanted N'
+</span>    <span class=keyword>int</span> tmp3[] = {101,103,105,101,102,102,110,100};
+    vector&lt;<span class=keyword>int</span>&gt; V3 (tmp3, tmp3+8);
+    timing =  bestTimeToBuyAndSell(V3);
+    cout &lt;&lt; &quot;Case 3: Buy at &quot; &lt;&lt; timing.first &lt;&lt; &quot; sell at &quot; &lt;&lt; timing.second &lt;&lt; endl;
+    assert(timing.first == 3);
+    assert(timing.second == 6);
+
+    <span class=comment>// Case 5: test when the best solution occurs after Case 4.
+</span>    <span class=keyword>int</span> tmp4[] = {101,103,105,101,102,102,100,52,59,86};    
+    vector&lt;<span class=keyword>int</span>&gt; V4 (tmp4, tmp4+10);
+    timing =  bestTimeToBuyAndSell(V4);
+    cout &lt;&lt; &quot;Case 4: Buy at &quot; &lt;&lt; timing.first &lt;&lt; &quot; sell at &quot; &lt;&lt; timing.second &lt;&lt; endl;
+    assert(timing.first == 7);
+    assert(timing.second == 9);
+}
+</pre></body>
+</html>

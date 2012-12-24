@@ -1,24 +1,36 @@
 import web
 web.config.debug = True
-render = web.template.render('templates/')
+renderTextPage = web.template.render('textPages/')
+renderCodePage = web.template.render('codePages/')
 
 urls = (
-    '/(.*)', 'index', 'cover', 'resume', 'code'
+    '/(.*)', 'index', 'cover', 'resume', 'code',
+    'checkBST', 'divide', 'log2', 'matchPattern', 'nQueen', 'stock'
 )
+
+app = web.application(urls, globals())
 
 class index:
     def GET(self, name):
-	if name == "cover":
-		return render.cover()
-	elif name == "resume":
-		return render.resume()
-	elif name == "index":
-		return render.index()
-	elif name == "code":
-		return render.code()
-	else: 
-		return render.index()
-	
+        print name
+        action = {
+            "cover" : renderTextPage.cover(),
+            "resume" : renderTextPage.resume(),
+            "index" : renderTextPage.index(),
+            "code" : renderTextPage.code(),
+
+            "checkBST" : renderCodePage.checkBST(),
+            "divide" : renderCodePage.divide(),
+            "log2" : renderCodePage.log2(),
+            "matchPattern" : renderCodePage.matchPattern(),
+            "stock" : renderCodePage.stock()
+        }
+        
+        if action.has_key(name):
+            return action[name]
+        else: 
+            return action["index"]
+
+    
 if __name__ == "__main__":
-    app = web.application(urls, globals())
     app.run()
