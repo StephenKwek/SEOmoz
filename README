@@ -2,6 +2,7 @@
 
 This is written using Python and web.py version 0.34 (see requirements.txt). The server code is in server.py and is quite short and straightfoward. 
 
+The app has been deployed to Heroku and can be accessed at http://evening-journey-4913.herokuapp.com/
 To run it locally, you need to:
 1. Make sure that web.py is installed. 
 2. simply do "python server.py ${PortNumber}". 
@@ -9,6 +10,7 @@ To run it locally, you need to:
 FILE ORGANIZATION:
 The root directory contains three files:
 	server.py : the simple server python code. 
+	server_unittest.py: unittest for server.py
 	requirement.txt : consists of just a single line "web.py==0.34" telling Heroku to use web.py version 0.34.
 	Procfile: instruct Heruk
 	
@@ -18,4 +20,8 @@ There are pages and source sample C++ codes are organized into 3 directories:
 	resume.html : My resume
 	code.html : This is a list of coding problems and links to the sample solution. It has a total of 10 topics.
 	index.html : This is the index pointing to different pages. 
+
+2. code: The original C/C++ sample codes are here. They are not use by the app server. 
+3. codePages: These are the html version of the sample codes in the directory code. They are the one being served. 
+
 	
