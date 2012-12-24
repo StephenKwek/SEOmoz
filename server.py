@@ -4,7 +4,7 @@ renderTextPage = web.template.render('textPages/')
 renderCodePage = web.template.render('codePages/')
 
 textPages = ['index', 'cover', 'resume', 'code']
-codePages = ['checkBST', 'divide', 'log2', 'matchPattern', 'nQueen', 'stock']
+codePages = ['checkBST', 'divide', 'dynamicProgramming', 'log2', 'matchPattern', 'nQueen', 'stock']
 urls = ['/(.*)'] + textPages + codePages
 
 app = web.application(urls, globals())
@@ -20,6 +20,7 @@ class index:
 
             "checkBST" : renderCodePage.checkBST(),
             "divide" : renderCodePage.divide(),
+            "dynamicProgramming" : renderCodePage.dynamicProgramming(),
             "log2" : renderCodePage.log2(),
             "matchPattern" : renderCodePage.matchPattern(),
             "nQueen" : renderCodePage.nQueen(),
