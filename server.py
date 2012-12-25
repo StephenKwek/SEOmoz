@@ -16,8 +16,8 @@ count = 0
 class index:
     def GET(self, name):
         global count
-		if name != "report":
-        	count += 1
+        if name != "report":
+            count += 1
 
         action = {
             "report" : renderReport.report(count),
