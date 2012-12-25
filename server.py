@@ -1,19 +1,25 @@
 import web
-import smtplib
 
 web.config.debug = True
 renderTextPage = web.template.render('textPages/')
 renderCodePage = web.template.render('codePages/')
+renderReport = web.template.render('report/')
 
 textPages = ['index', 'cover', 'resume', 'code']
 codePages = ['checkBST', 'divide', 'dynamicProgramming', 'log2', 'matchPattern', 'nQueen', 'stock']
-urls = ['/(.*)'] + textPages + codePages
+reportPages = ['report']
+urls = ['/(.*)'] + textPages + codePages + reportPages
 
-app = web.application(urls, globals())
+app = web.application(urls, globals()) # defined as global for unittest purpose.
+count = 0
 
 class index:
     def GET(self, name):
+        global count
+        count += 1
+
         action = {
+            "report" : renderReport.report(count),
             "cover" : renderTextPage.cover(),
             "resume" : renderTextPage.resume(),
             "index" : renderTextPage.index(),
@@ -26,6 +32,7 @@ class index:
             "matchPattern" : renderCodePage.matchPattern(),
             "nQueen" : renderCodePage.nQueen(),
             "stock" : renderCodePage.stock()
+
         }
         
         if action.has_key(name):
@@ -33,6 +40,7 @@ class index:
         else: 
             return action["cover"]
 
+            
     
 if __name__ == "__main__":
     app.run()
