@@ -1,4 +1,6 @@
 import web
+import smtplib
+
 web.config.debug = True
 renderTextPage = web.template.render('textPages/')
 renderCodePage = web.template.render('codePages/')
@@ -11,7 +13,6 @@ app = web.application(urls, globals())
 
 class index:
     def GET(self, name):
-        print name
         action = {
             "cover" : renderTextPage.cover(),
             "resume" : renderTextPage.resume(),
