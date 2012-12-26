@@ -1,4 +1,3 @@
-
 #pragma once
 #include <set>
 #include <vector>
@@ -14,7 +13,6 @@ struct TreeNode
 	TreeNode<int> *left; 
 	TreeNode<int> *right; 
 };
-
 
 /* 
    IsBinarySearchTree checks that a given tree is a binary search tree by performing an inorder
@@ -50,7 +48,6 @@ const bool IsBinarySearchTree(const TreeNode<int> *cur,
 	return (!cur->right || IsBinarySearchTree(cur->right, visited, largestValueSeenSoFar));
 }
 
-
 /*
    return true if this tree rooted at rootNode is a Binary Search Tree and false. 
    Throw an exception is the root is NULL. 
@@ -67,7 +64,6 @@ inline const bool IsBinarySearchTree(const TreeNode<int> * rootNode)
 	return IsBinarySearchTree(rootNode, visited, max);
 }
 
-
 void DeleteTree(TreeNode<int> *node)
 {
 	if (!node)
@@ -83,7 +79,6 @@ void DeleteTree(TreeNode<int> *node)
 	}
 	delete node;
 }
-
 
 /*
   CreateTree takes a two dimensional array where each row is a 3-tuple
@@ -106,24 +101,13 @@ TreeNode<int>* CreateTree(const int tree[][3], const int numNodes)
 	for (int i = 0; i < numNodes; i++)
 	{
 		nodes[i]->value = tree[i][0];
-
-		// assign left child pointer
-		if (tree[i][1] != -1)
-			nodes[i]->left = nodes[tree[i][1]];
-		else
-			nodes[i]->left = NULL;
-
-		// assign right child pointer
-		if (tree[i][2] != -1)
-			nodes[i]->right = nodes[tree[i][2]];
-		else
-			nodes[i]->right = NULL;
+		nodes[i]->left = (tree[i][1] != -1)? nodes[tree[i][1]]: NULL;
+		nodes[i]->right = (tree[i][2] != -1) ? nodes[tree[i][2]] : NULL;
 	}
 
 	// return the first node as the root. 
 	return nodes[0];
 }
-
 
 int main()
 {

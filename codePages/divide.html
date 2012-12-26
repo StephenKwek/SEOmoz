@@ -30,8 +30,8 @@ Divide two integers without using multiplication, division and mod operator.
     <span class=keyword>unsigned</span> <span class=keyword>int</span> result = 0;
     <span class=keyword>while</span> (a &gt;= y)
     {
-        result = result &lt;&lt; 1;
-        <span class=keyword>if</span> (b &gt;= a)
+        result = result &lt;&lt; 1; <span class=comment>// multiply by 2
+</span>        <span class=keyword>if</span> (b &gt;= a)
         {
             b -= a;
             result++; 
@@ -41,7 +41,6 @@ Divide two integers without using multiplication, division and mod operator.
 </span>    }
     <span class=keyword>return</span> result;
 }
-
 
 <span class=keyword>void</span> main() {
     assert(divide(0, 2) == 0/2);

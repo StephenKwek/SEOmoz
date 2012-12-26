@@ -1,6 +1,7 @@
 #include <set>
 #include <vector>
 #include <iostream>
+#include <assert.h>
 
 using namespace std;
 
@@ -24,18 +25,18 @@ int numUniquePaths_2D(const set<pair<int, int>> obstacles, const int N, const in
 	// fill in the boundary condition along the first row
     A[0][0] = 1;
 	pair<int, int> cell = make_pair(0,0);
+	cell.first = 0;
     for (int i = 1; i < M; i++) {
-		cell.first = 0;
 		cell.second = i;
         if (obstacles.find(cell) == obstacles.end())
             A[0][i] = 1;
         else
             break;
 	}
-    
+  
+	cell.second = 0;
     for (int i = 1; i < N; i++) {
 		cell.first = i;
-		cell.second = 0;
         if (obstacles.find(cell) == obstacles.end())
             A[i][0] = 1;
         else
@@ -43,14 +44,16 @@ int numUniquePaths_2D(const set<pair<int, int>> obstacles, const int N, const in
 	}
                  
 	/**
-	 fill up the table
+	compute the partial solution one row at a time.
 	 **/
-    for (int i = 1; i < N; i++)
+	for (int i = 1; i < N; i++) {
+        cell.first = i;
         for (int j = 1; j < M; j++) {
-            pair<int, int> cell = make_pair(i,j);
-            if (obstacles.find(cell) == obstacles.end())
+			cell.second = j;
+			if (obstacles.find(cell) == obstacles.end())
                 A[i][j] += A[i-1][j] + A[i][j-1];
         }
+	}
         
     return A[N-1][M-1];
         
@@ -69,8 +72,8 @@ int numUniquePaths_2Rows(set<pair<int, int>> obstacles, const int N, const int M
     int curRowNumber = 0;
 	pair<int, int> cell = make_pair(0,0); 
     pre[0] = 1;
+    cell.first = 0;
     for (int i = 1; i < M; i++) {
-        cell.first = 0;
 		cell.second = i;
         if (obstacles.find(cell) == obstacles.end())
             pre[i] = 1;
@@ -84,8 +87,8 @@ int numUniquePaths_2Rows(set<pair<int, int>> obstacles, const int N, const int M
     vector<int> cur (M,0);    
     while (curRowNumber < N-1) {
         curRowNumber++;
+        cell.first = curRowNumber;
         for (int j = 0; j < M; j++) {
-             cell.first = curRowNumber;
              cell.second = j;
              cur[j] = 0;
              if (obstacles.find(cell) == obstacles.end())
@@ -111,8 +114,8 @@ int numUniquePaths_1Row(set<pair<int, int>> obstacles, const int N, const int M)
 
 	// process the first row
 	pair<int, int> cell = make_pair(0,0);
+	cell.first = 0;
     for (int i = 1; i < M; i++) {
-		cell.first = 0;
 		cell.second = i;
         if (obstacles.find(cell) == obstacles.end())
             V[i] = 1;
@@ -125,10 +128,9 @@ int numUniquePaths_1Row(set<pair<int, int>> obstacles, const int N, const int M)
 	*/
 	row = 1;
 	for (; row < N; row++) {
+        cell.first = row;
 		for (int col = 0; col < M; col++) {
-             cell.first = row;
              cell.second = col;
-
 			 int cur = 0;
              if (obstacles.find(cell) == obstacles.end())
                 cur += V[col];
@@ -143,17 +145,27 @@ int numUniquePaths_1Row(set<pair<int, int>> obstacles, const int N, const int M)
 
 void main() {
 	set<pair<int, int>> obstacles;
-	cout << numUniquePaths_2D(obstacles, 3, 3) << endl;
-	cout << numUniquePaths_2Rows(obstacles, 3, 3) << endl;
-	cout << numUniquePaths_1Row(obstacles, 3, 3) << endl;
+	assert(numUniquePaths_2D(obstacles, 1, 1)== 1);
+	assert(numUniquePaths_2Rows(obstacles, 1, 1)== 1);
+	assert(numUniquePaths_1Row(obstacles, 1, 1)== 1);
+
+	assert(numUniquePaths_2D(obstacles, 3, 3) == 6);
+	assert(numUniquePaths_2Rows(obstacles, 3, 3) ==  6);
+	assert(numUniquePaths_1Row(obstacles, 3, 3) == 6);
 
 	obstacles.insert(make_pair(1, 1));
-	cout << numUniquePaths_2D(obstacles, 4, 4) << endl;
-	cout << numUniquePaths_2Rows(obstacles, 4, 4) << endl;
-	cout << numUniquePaths_1Row(obstacles, 4, 4) << endl;
+	assert(numUniquePaths_2D(obstacles, 4, 4)== 8);
+	assert(numUniquePaths_2Rows(obstacles, 4, 4)== 8);
+	assert(numUniquePaths_1Row(obstacles, 4, 4)== 8);
+
+	assert(numUniquePaths_2D(obstacles, 4, 5)== 15);
+	assert(numUniquePaths_2Rows(obstacles, 4, 5)== 15);
+	assert(numUniquePaths_1Row(obstacles, 4, 5)== 15);
 
 	obstacles.insert(make_pair(2, 3));
-	cout << numUniquePaths_2D(obstacles, 5, 5) << endl;
-	cout << numUniquePaths_2Rows(obstacles, 5, 5) << endl;
-	cout << numUniquePaths_1Row(obstacles, 5, 5) << endl;
+	assert(numUniquePaths_2D(obstacles, 5, 5)== 18);
+	assert(numUniquePaths_2Rows(obstacles, 5, 5)== 18);
+	assert(numUniquePaths_1Row(obstacles, 5, 5)== 18);
+
+	cout << "All test pass." << endl;
 }

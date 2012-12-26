@@ -10,6 +10,7 @@
 <pre style="font-family:courier;font-size:10pt"><span class=pp>#include</span> &lt;set&gt;
 <span class=pp>#include</span> &lt;vector&gt;
 <span class=pp>#include</span> &lt;iostream&gt;
+<span class=pp>#include</span> &lt;assert.h&gt;
 
 <span class=keyword>using</span> <span class=keyword>namespace</span> std;
 
@@ -33,18 +34,18 @@
     <span class=comment>// fill in the boundary condition along the first row
 </span>    A[0][0] = 1;
     pair&lt;<span class=keyword>int</span>, <span class=keyword>int</span>&gt; cell = make_pair(0,0);
+    cell.first = 0;
     <span class=keyword>for</span> (<span class=keyword>int</span> i = 1; i &lt; M; i++) {
-        cell.first = 0;
         cell.second = i;
         <span class=keyword>if</span> (obstacles.find(cell) == obstacles.end())
             A[0][i] = 1;
         <span class=keyword>else</span>
             <span class=keyword>break</span>;
     }
-    
+  
+    cell.second = 0;
     <span class=keyword>for</span> (<span class=keyword>int</span> i = 1; i &lt; N; i++) {
         cell.first = i;
-        cell.second = 0;
         <span class=keyword>if</span> (obstacles.find(cell) == obstacles.end())
             A[i][0] = 1;
         <span class=keyword>else</span>
@@ -52,14 +53,16 @@
     }
                  
     <span class=comment>/**
-     fill up the table
+    compute the partial solution one row at a time.
      **/</span>
-    <span class=keyword>for</span> (<span class=keyword>int</span> i = 1; i &lt; N; i++)
+    <span class=keyword>for</span> (<span class=keyword>int</span> i = 1; i &lt; N; i++) {
+        cell.first = i;
         <span class=keyword>for</span> (<span class=keyword>int</span> j = 1; j &lt; M; j++) {
-            pair&lt;<span class=keyword>int</span>, <span class=keyword>int</span>&gt; cell = make_pair(i,j);
+            cell.second = j;
             <span class=keyword>if</span> (obstacles.find(cell) == obstacles.end())
                 A[i][j] += A[i-1][j] + A[i][j-1];
         }
+    }
         
     <span class=keyword>return</span> A[N-1][M-1];
         
@@ -78,8 +81,8 @@
 </span>    <span class=keyword>int</span> curRowNumber = 0;
     pair&lt;<span class=keyword>int</span>, <span class=keyword>int</span>&gt; cell = make_pair(0,0); 
     pre[0] = 1;
+    cell.first = 0;
     <span class=keyword>for</span> (<span class=keyword>int</span> i = 1; i &lt; M; i++) {
-        cell.first = 0;
         cell.second = i;
         <span class=keyword>if</span> (obstacles.find(cell) == obstacles.end())
             pre[i] = 1;
@@ -93,8 +96,8 @@
     vector&lt;<span class=keyword>int</span>&gt; cur (M,0);    
     <span class=keyword>while</span> (curRowNumber &lt; N-1) {
         curRowNumber++;
+        cell.first = curRowNumber;
         <span class=keyword>for</span> (<span class=keyword>int</span> j = 0; j &lt; M; j++) {
-             cell.first = curRowNumber;
              cell.second = j;
              cur[j] = 0;
              <span class=keyword>if</span> (obstacles.find(cell) == obstacles.end())
@@ -120,8 +123,8 @@
 
     <span class=comment>// process the first row
 </span>    pair&lt;<span class=keyword>int</span>, <span class=keyword>int</span>&gt; cell = make_pair(0,0);
+    cell.first = 0;
     <span class=keyword>for</span> (<span class=keyword>int</span> i = 1; i &lt; M; i++) {
-        cell.first = 0;
         cell.second = i;
         <span class=keyword>if</span> (obstacles.find(cell) == obstacles.end())
             V[i] = 1;
@@ -134,10 +137,9 @@
     */</span>
     row = 1;
     <span class=keyword>for</span> (; row &lt; N; row++) {
+        cell.first = row;
         <span class=keyword>for</span> (<span class=keyword>int</span> col = 0; col &lt; M; col++) {
-             cell.first = row;
              cell.second = col;
-
              <span class=keyword>int</span> cur = 0;
              <span class=keyword>if</span> (obstacles.find(cell) == obstacles.end())
                 cur += V[col];
@@ -152,19 +154,29 @@
 
 <span class=keyword>void</span> main() {
     set&lt;pair&lt;<span class=keyword>int</span>, <span class=keyword>int</span>&gt;&gt; obstacles;
-    cout &lt;&lt; numUniquePaths_2D(obstacles, 3, 3) &lt;&lt; endl;
-    cout &lt;&lt; numUniquePaths_2Rows(obstacles, 3, 3) &lt;&lt; endl;
-    cout &lt;&lt; numUniquePaths_1Row(obstacles, 3, 3) &lt;&lt; endl;
+    assert(numUniquePaths_2D(obstacles, 1, 1)== 1);
+    assert(numUniquePaths_2Rows(obstacles, 1, 1)== 1);
+    assert(numUniquePaths_1Row(obstacles, 1, 1)== 1);
+
+    assert(numUniquePaths_2D(obstacles, 3, 3) == 6);
+    assert(numUniquePaths_2Rows(obstacles, 3, 3) ==  6);
+    assert(numUniquePaths_1Row(obstacles, 3, 3) == 6);
 
     obstacles.insert(make_pair(1, 1));
-    cout &lt;&lt; numUniquePaths_2D(obstacles, 4, 4) &lt;&lt; endl;
-    cout &lt;&lt; numUniquePaths_2Rows(obstacles, 4, 4) &lt;&lt; endl;
-    cout &lt;&lt; numUniquePaths_1Row(obstacles, 4, 4) &lt;&lt; endl;
+    assert(numUniquePaths_2D(obstacles, 4, 4)== 8);
+    assert(numUniquePaths_2Rows(obstacles, 4, 4)== 8);
+    assert(numUniquePaths_1Row(obstacles, 4, 4)== 8);
+
+    assert(numUniquePaths_2D(obstacles, 4, 5)== 15);
+    assert(numUniquePaths_2Rows(obstacles, 4, 5)== 15);
+    assert(numUniquePaths_1Row(obstacles, 4, 5)== 15);
 
     obstacles.insert(make_pair(2, 3));
-    cout &lt;&lt; numUniquePaths_2D(obstacles, 5, 5) &lt;&lt; endl;
-    cout &lt;&lt; numUniquePaths_2Rows(obstacles, 5, 5) &lt;&lt; endl;
-    cout &lt;&lt; numUniquePaths_1Row(obstacles, 5, 5) &lt;&lt; endl;
+    assert(numUniquePaths_2D(obstacles, 5, 5)== 18);
+    assert(numUniquePaths_2Rows(obstacles, 5, 5)== 18);
+    assert(numUniquePaths_1Row(obstacles, 5, 5)== 18);
+
+    cout &lt;&lt; &quot;All test pass.&quot; &lt;&lt; endl;
 }
 </pre></body>
 </html>

@@ -21,7 +21,7 @@ int divide(const unsigned int x, const unsigned int y)
 	unsigned int result = 0;
 	while (a >= y)
 	{
-		result = result << 1;
+		result = result << 1; // multiply by 2
 		if (b >= a)
 		{
 			b -= a;
@@ -32,7 +32,6 @@ int divide(const unsigned int x, const unsigned int y)
 	}
 	return result;
 }
-
 
 void main() {
 	assert(divide(0, 2) == 0/2);

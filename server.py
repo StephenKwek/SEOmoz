@@ -4,7 +4,7 @@ web.config.debug = True
 textPages = ['index', 'cover', 'resume', 'code']
 textPages = ['index', 'cover', 'resume', 'code']
 codePages = ['checkBST', 'divide', 'dynamicProgramming', 'log2', 'matchPattern', 'nQueen', 'stock']
-reportPages = ['report']
+reportPages = ['monitor']
 
 urls = ['/(.*)'] + textPages + codePages + reportPages
 app = web.application(urls, globals()) 
@@ -13,7 +13,7 @@ app = web.application(urls, globals())
 class index:
     renderTextPage = web.template.render('textPages/')
     renderCodePage = web.template.render('codePages/')
-    renderReport = web.template.render('report/')
+    renderMonitor = web.template.render('monitor/')
     count = dict.fromkeys(textPages + codePages + reportPages + [""], 0)
 
     def GET(self, name):
@@ -21,7 +21,7 @@ class index:
             index.count[name] += 1
 
         action = {
-            "report" : index.renderReport.report(index.count),
+            "monitor" : index.renderMonitor.monitor(index.count),
             "cover" : index.renderTextPage.cover(),
             "resume" : index.renderTextPage.resume(),
             "index" : index.renderTextPage.index(),

@@ -30,7 +30,6 @@ struct Dominated {
 	set<int> dig_TR_BL;
 };
 
-
 void NQueen(const int N, 
 			int curRow, 
 			Dominated domPos,
@@ -65,7 +64,6 @@ void NQueen(const int N,
 	}
 }
 
-
 void printResult(const list<vector<int>> &result) {
 	for (list<vector<int>>::const_iterator p = result.begin(); p != result.end(); p++) {
 		vector<int> soln = *p;
@@ -79,7 +77,6 @@ void printResult(const list<vector<int>> &result) {
 		cout << endl;
 	}
 }
-
 
 void main() {
 	Dominated domPos;

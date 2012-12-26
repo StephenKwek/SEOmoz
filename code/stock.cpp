@@ -25,17 +25,18 @@ pair<int, int> bestTimeToBuyAndSell(const vector<int> &A)
 
 	int curMin = 0;
 	int curMax = 0;
-	int start = 0;
-	int end = 0;
+	
+	int buy = 0;
+	int sell = 0;
 
 	for (size_t i = 0; i < A.size(); i++)
 	{
 		if (A[i] > A[curMax]) {
 			curMax = i;	
-			if (A[curMax] - A[curMin] >= A[end] - A[start])           
+			if (A[curMax] - A[curMin] >= A[sell] - A[buy])           
 			{
-				end=curMax;
-				start=curMin;
+				sell=curMax;
+				buy=curMin;
 			}
 		}
 		else if (A[i] <= A[curMin])
@@ -44,13 +45,11 @@ pair<int, int> bestTimeToBuyAndSell(const vector<int> &A)
 			curMax = i;
 		}
 	}
-	return make_pair(start, end);
+	return make_pair(buy, sell);
 
 }
 
-
-void main() {
-		
+void main() {		
 	// Case 1: test when the vector is empty
 	vector<int> V0;
 	pair<int, int> timing =  bestTimeToBuyAndSell(V0);
@@ -59,7 +58,7 @@ void main() {
 	assert(timing.second == -1);
 		
 	// Case 2: test when the vector only has 1 entry
-	vector<int> V1
+	vector<int> V1;
 	V1.push_back(1);
 	timing =  bestTimeToBuyAndSell(V1);
 	cout << "Case 1: Buy at " << timing.first << " sell at " << timing.second << endl;

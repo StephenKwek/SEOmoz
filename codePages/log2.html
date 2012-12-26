@@ -34,36 +34,36 @@
     left = right - 1;
     leftVal = rightVal / 2;
 
-    midVal = sqrt(leftVal * rightVal);
-    mid = (left + right)/2;
-
     <span class=comment>// perform the binary search in log-space while updating the 
 </span>    <span class=comment>// corresponding mid point in normal space.
 </span>    <span class=keyword>while</span> (rightVal - leftVal &gt; precision)
     {
+        midVal = sqrt(leftVal * rightVal);
+        mid = (left + right)/2;
+
         <span class=keyword>if</span> (midVal &lt; x)
         {
-            left = mid; leftVal = midVal;
+            left = mid; 
+            leftVal = midVal;
         }
         <span class=keyword>else</span>
         {
-            right = mid; rightVal = midVal;
+            right = mid; 
+            rightVal = midVal;
         }    
-        midVal = sqrt(leftVal * rightVal);
-        mid = (left + right)/2;
     }
 
     <span class=keyword>return</span> mid;
 }
 
-
 <span class=keyword>void</span> main() {
     <span class=keyword>const</span> <span class=keyword>float</span> log_e_2 = log(2.0f);
-    <span class=keyword>float</span> test[] = {1.0f, 1.4f, 2.0f, 3.0f, 4.0f, 6.5f};
+    <span class=keyword>float</span> test[] = {1.0f, 1.4f, 2.0f, 3.0f, 4.0f, 6.5f, 32.33f};
 
     <span class=keyword>for</span> (size_t i = 0; i &lt; 6 ; i++) {
         assert(abs(log_2(test[i]) - log(test[i])/log_e_2) &lt; 1.0e-006);
     }
 }
+
 </pre></body>
 </html>

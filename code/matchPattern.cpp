@@ -8,13 +8,13 @@ using namespace std;
 
 The matching should cover the entire input string (not partial).
 */
-bool isMatch(const char *s, const char *p) {
+const bool isMatch(const char *s, const char *p) {
 	if (*p == '\0')
 		return *s == '\0';
 
 	if (*(p+1) == '*')
 	{
-		// map * is match to empty string 
+		// * is match to empty string 
 		if (isMatch(s,p+2))
 			return true;
 
@@ -32,7 +32,7 @@ bool isMatch(const char *s, const char *p) {
 	return false;
 }
 
-
+/*
 void main() {
 	// test basic matching without operator
 	assert(isMatch("", "") == true);
@@ -59,3 +59,4 @@ void main() {
 	assert(isMatch("abcde", ".*") == true);
 	assert(isMatch("aab", "c*a*b") == true);
 }
+*/
