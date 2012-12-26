@@ -4,11 +4,13 @@ import unittest
 class ServerTest(unittest.TestCase):
 	def testTextPage(self):
 		for page in server.textPages:
+			print page
 			response = server.app.request("/" + page)
 			self.assertEqual(response.status, '200 OK')
 			self.assertEqual(response.data[:30], '<!DOCTYPE HTML PUBLIC "-//W3C/')
 			self.assertEqual(response.data[-16:], '</BODY>\n</HTML>\n')
 
+		print server.codePages
 		for page in server.codePages:
 			#page = 'nQueen'
 			print page

@@ -1,5 +1,6 @@
 $def with (count)
-$if count:
-	Number of access so far = $count
-$else:
-	count is not passed into report
+<h2>ACCESS REPORT</h2>
+<div>
+$for k in count.keys():
+	&quot;&#92;$k &quot; has been visited $count[k] times <br>
+</div>

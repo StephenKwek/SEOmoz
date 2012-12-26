@@ -1,44 +1,46 @@
 import web
-
 web.config.debug = True
-renderTextPage = web.template.render('textPages/')
-renderCodePage = web.template.render('codePages/')
-renderReport = web.template.render('report/')
-
+    
+textPages = ['index', 'cover', 'resume', 'code']
 textPages = ['index', 'cover', 'resume', 'code']
 codePages = ['checkBST', 'divide', 'dynamicProgramming', 'log2', 'matchPattern', 'nQueen', 'stock']
 reportPages = ['report']
-urls = ['/(.*)'] + textPages + codePages + reportPages
 
-app = web.application(urls, globals()) # defined as global for unittest purpose.
-count = 0
+urls = ['/(.*)'] + textPages + codePages + reportPages
+app = web.application(urls, globals()) 
+
 
 class index:
+    renderTextPage = web.template.render('textPages/')
+    renderCodePage = web.template.render('codePages/')
+    renderReport = web.template.render('report/')
+    count = dict.fromkeys(textPages + codePages + reportPages + [""], 0)
+
     def GET(self, name):
-        global count
-        if name != "report":
-            count += 1
+        if index.count.has_key(name):
+            index.count[name] += 1
 
         action = {
-            "report" : renderReport.report(count),
-            "cover" : renderTextPage.cover(),
-            "resume" : renderTextPage.resume(),
-            "index" : renderTextPage.index(),
-            "code" : renderTextPage.code(),
+            "report" : index.renderReport.report(index.count),
+            "cover" : index.renderTextPage.cover(),
+            "resume" : index.renderTextPage.resume(),
+            "index" : index.renderTextPage.index(),
+            "code" : index.renderTextPage.code(),
 
-            "checkBST" : renderCodePage.checkBST(),
-            "divide" : renderCodePage.divide(),
-            "dynamicProgramming" : renderCodePage.dynamicProgramming(),
-            "log2" : renderCodePage.log2(),
-            "matchPattern" : renderCodePage.matchPattern(),
-            "nQueen" : renderCodePage.nQueen(),
-            "stock" : renderCodePage.stock()
+            "checkBST" : index.renderCodePage.checkBST(),
+            "divide" : index.renderCodePage.divide(),
+            "dynamicProgramming" : index.renderCodePage.dynamicProgramming(),
+            "log2" : index.renderCodePage.log2(),
+            "matchPattern" : index.renderCodePage.matchPattern(),
+            "nQueen" : index.renderCodePage.nQueen(),
+            "stock" : index.renderCodePage.stock()
 
         }
         
         if action.has_key(name):
             return action[name]
         else: 
+            index.count["cover"] += 1
             return action["cover"]
 
             
