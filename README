@@ -1,27 +1,31 @@
 
+This web service is written using Python and web.py version 0.34 (see requirements.txt). The server code is in server.py.
 
-This web service is written using Python and web.py version 0.34 (see requirements.txt). The server code is in server.py and is quite short and straightfoward. 
+The app has been deployed to Heroku and can be accessed via http://evening-journey-4913.herokuapp.com/ .From the homepage, you can access the resume and code sample page by following the links.
+A simple monitor has also been implemented to show access frequency of each page, which can be access through the API monitor.
 
-The app has been deployed to Heroku and can be accessed via http://evening-journey-4913.herokuapp.com/
+The code can be downloaded from github -- https://github.com/StephenKwek/SEOmoz
 To run it locally, you need to:
-1. Make sure that web.py is installed. 
-2. simply do "python server.py ${PortNumber}". 
+1. Make sure that web.py v0.34 is installed.
+2. Simply do "python server.py ${PortNumber}".
+3. Enter 0.0.0.0:${PortNumber}
+
 
 FILE ORGANIZATION:
 The root directory contains three files:
-	server.py : the simple server python code. 
-	server_unittest.py: unittest for server.py
-	requirement.txt : consists of just a single line "web.py==0.34" telling Heroku to use web.py version 0.34.
-	Procfile: instruct Heruk
-	
-The pages and sample C++ source codes are organized into 3 directories:
+    server.py : the simple server python code.
+    server_unittest.py: unittest for server.py
+    requirement.txt : consists of just a single line "web.py==0.34" telling Heroku to use web.py version 0.34.
+    Procfile: instruction for Heruko to run "Python server.py ${PortNumber}".
+   
+The pages and sample C++ source codes are organized into 4 directories:
 1. textPages: it contains the following four pages:
-	cover.html : The cover letter for my SEOmoz job application. 
-	resume.html : My resume
-	code.html : This is a list of coding problems and links to the sample solution. It has a total of 10 topics.
-	index.html : This is the index pointing to different pages. 
+    cover.html : The cover letter for my SEOmoz job application.
+    resume.html : My resume
+    code.html : This is a list of coding problems and links to the sample solution. It has a total of 10 topics.
+    index.html : This is the index pointing to different pages.
 
-2. code: The original C/C++ sample codes are here. They are not use by the app server. 
-3. codePages: These are the html version of the sample codes in the directory code. They are the one being served. 
+2. code: The original C/C++ sample codes are here. They are not used by the app server.
+3. codePages: These are the html version of the sample codes in the directory code. They are the ones being served.
+4. monitor: contains monitor.html which runs a python web.py template that displays the frequency of access for each page.
 
-	
