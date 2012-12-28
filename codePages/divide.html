@@ -21,7 +21,8 @@ Divide two integers without using multiplication, division and mod operator.
     <span class=keyword>unsigned</span> <span class=keyword>int</span> a = y;
     <span class=keyword>unsigned</span> <span class=keyword>int</span> b = x;
 
-    <span class=keyword>while</span> (b &gt;= a)
+    <span class=comment>// find the largest power of 2 that is larger than b, call it a
+</span>    <span class=keyword>while</span> (b &gt;= a)
     {
         a = a &lt;&lt; 1; <span class=comment>// multiply a by 2
 </span>    }
@@ -50,6 +51,18 @@ Divide two integers without using multiplication, division and mod operator.
     assert(divide(4, 3) == 4/3);
     assert(divide(14, 5) == 14/5);
     assert(divide(2031, 31) == 2031/31);
+
+    <span class=keyword>bool</span> exceptionThrown = <span class=keyword>false</span>;
+    <span class=keyword>try</span> {
+        divide(123, 0);
+    }
+    <span class=keyword>catch</span> (<span class=keyword>const</span> <span class=keyword>char</span> *e)
+    {
+        printf(&quot;Exception %s\n&quot;, e);
+        exceptionThrown = <span class=keyword>true</span>;
+    }
+    assert(exceptionThrown);
+
     cout &lt;&lt; &quot;All tests passed!&quot; &lt;&lt; endl;
 }
 </pre></body>
