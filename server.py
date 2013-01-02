@@ -11,9 +11,9 @@ app = web.application(urls, globals())
 
 
 class index:
-    renderTextPage = web.template.render('textPages/')
-    renderCodePage = web.template.render('codePages/')
-    renderMonitor = web.template.render('monitor/')
+    _renderTextPage = web.template.render('textPages/')
+    _renderCodePage = web.template.render('codePages/')
+    _renderMonitor = web.template.render('monitor/')
     count = dict.fromkeys(textPages + codePages + reportPages + [""], 0)
 
     def GET(self, name):
@@ -21,19 +21,19 @@ class index:
             index.count[name] += 1
 
         action = {
-            "monitor" : index.renderMonitor.monitor(index.count),
-            "cover" : index.renderTextPage.cover(),
-            "resume" : index.renderTextPage.resume(),
-            "index" : index.renderTextPage.index(),
-            "code" : index.renderTextPage.code(),
+            "monitor" : index._renderMonitor.monitor(index.count),
+            "cover" : index._renderTextPage.cover(),
+            "resume" : index._renderTextPage.resume(),
+            "index" : index._renderTextPage.index(),
+            "code" : index._renderTextPage.code(),
 
-            "checkBST" : index.renderCodePage.checkBST(),
-            "divide" : index.renderCodePage.divide(),
-            "dynamicProgramming" : index.renderCodePage.dynamicProgramming(),
-            "log2" : index.renderCodePage.log2(),
-            "matchPattern" : index.renderCodePage.matchPattern(),
-            "nQueen" : index.renderCodePage.nQueen(),
-            "stock" : index.renderCodePage.stock()
+            "checkBST" : index._renderCodePage.checkBST(),
+            "divide" : index._renderCodePage.divide(),
+            "dynamicProgramming" : index._renderCodePage.dynamicProgramming(),
+            "log2" : index._renderCodePage.log2(),
+            "matchPattern" : index._renderCodePage.matchPattern(),
+            "nQueen" : index._renderCodePage.nQueen(),
+            "stock" : index._renderCodePage.stock()
 
         }
         

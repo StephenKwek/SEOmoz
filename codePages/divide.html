@@ -9,38 +9,47 @@
 <pre style="font-family:courier;font-size:10pt"><span class=pp>#include</span> &lt;iostream&gt;
 <span class=pp>#include</span> &lt;assert.h&gt;
 <span class=pp>#include</span> &lt;stack&gt;
+<span class=pp>#include</span> &lt;math.h&gt;
+
 <span class=keyword>using</span> <span class=keyword>namespace</span> std;
 <span class=comment>/*
 Divide Two Positive Integers
 
-Divide two integers without using multiplication, division and mod operator. 
+Divide two integers without using multiplication, division and mod operator.
 */</span>
 
 <span class=keyword>int</span> divide(<span class=keyword>const</span> <span class=keyword>unsigned</span> <span class=keyword>int</span> x, <span class=keyword>const</span> <span class=keyword>unsigned</span> <span class=keyword>int</span> y)
 {
+    <span class=keyword>if</span> (y == 0) {
+        <span class=keyword>throw</span> &quot;divide by zero error&quot;;
+    }
+
     <span class=keyword>unsigned</span> <span class=keyword>int</span> a = y;
     <span class=keyword>unsigned</span> <span class=keyword>int</span> b = x;
 
-    <span class=comment>// find the largest power of 2 that is larger than b, call it a
-</span>    <span class=keyword>while</span> (b &gt;= a)
+    <span class=keyword>while</span> (b &gt;= a)
     {
-        a = a &lt;&lt; 1; <span class=comment>// multiply a by 2
-</span>    }
-    
+        <span class=keyword>unsigned</span> <span class=keyword>int</span> tmp = a &lt;&lt; 1;
+        <span class=keyword>if</span> (tmp &lt; a) { <span class=comment>// integer overflow
+</span>            <span class=keyword>throw</span> &quot;integer overflow&quot;;
+        a = tmp;
+    }
+   
     <span class=keyword>unsigned</span> <span class=keyword>int</span> result = 0;
     <span class=keyword>while</span> (a &gt;= y)
     {
-        result = result &lt;&lt; 1; <span class=comment>// multiply by 2
-</span>        <span class=keyword>if</span> (b &gt;= a)
+        result = result &lt;&lt; 1;
+        <span class=keyword>if</span> (b &gt;= a)
         {
             b -= a;
-            result++; 
+            result++;
         }
 
         a = a &gt;&gt; 1; <span class=comment>// divide a by 2
 </span>    }
     <span class=keyword>return</span> result;
 }
+
 
 <span class=keyword>void</span> main() {
     assert(divide(0, 2) == 0/2);
@@ -63,7 +72,18 @@ Divide two integers without using multiplication, division and mod operator.
     }
     assert(exceptionThrown);
 
+    <span class=keyword>try</span> {
+        divide(MAX_INT - 10, 10);
+    }
+    <span class=keyword>catch</span> (<span class=keyword>const</span> <span class=keyword>char</span> *e)
+    {
+        printf(&quot;Exception %s\n&quot;, e);
+        exceptionThrown = <span class=keyword>true</span>;
+    }
+    assert(exceptionThrown);
+
     cout &lt;&lt; &quot;All tests passed!&quot; &lt;&lt; endl;
+
 }
 </pre></body>
 </html>

@@ -1,8 +1,7 @@
-~/Tools/cpphtml.exe checkBST.cpp > ../codePages/checkBST.html
-~/Tools/cpphtml.exe divide.cpp > ../codePages/divide.html
-~/Tools/cpphtml.exe log2.cpp > ../codePages/log2.html
-~/Tools/cpphtml.exe matchPattern.cpp > ../codePages/matchPattern.html
-~/Tools/cpphtml.exe nQueen.cpp > ../codePages/nQueen.html
-~/Tools/cpphtml.exe stock.cpp > ../codePages/stock.html
-~/Tools/cpphtml.exe dynamicProgramming.cpp > ../codePages/dynamicProgramming.html
-
+cpphtml.exe checkBST.cpp > ../codePages/checkBST.html
+cpphtml.exe divide.cpp > ../codePages/divide.html
+cpphtml.exe log2.cpp > ../codePages/log2.html
+cpphtml.exe matchPattern.cpp > ../codePages/matchPattern.html
+cpphtml.exe nQueen.cpp > ../codePages/nQueen.html
+cpphtml.exe stock.cpp > ../codePages/stock.html
+cpphtml.exe dynamicProgramming.cpp > ../codePages/dynamicProgramming.html

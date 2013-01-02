@@ -3,12 +3,13 @@
 <HEAD>
 	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
 	<TITLE>CODE SAMPLE</TITLE>
-	<meta name="robots" content="noindex">
 	<META NAME="GENERATOR" CONTENT="LibreOffice 3.5  (Linux)">
 	<META NAME="AUTHOR" CONTENT="Stephen Kwek">
 	<META NAME="CREATED" CONTENT="20121222;16173200">
 	<META NAME="CHANGEDBY" CONTENT="Stephen Kwek">
-	<META NAME="CHANGED" CONTENT="20121224;11590400">
+	<META NAME="CHANGED" CONTENT="20130101;19104900">
+	<META NAME="robots" CONTENT="noindex">
+	<META NAME="CHANGEDBY" CONTENT="Stephen Kwek">
 	<META NAME="robots" CONTENT="noindex">
 	<META NAME="CHANGEDBY" CONTENT="Stephen Kwek">
 	<META NAME="CHANGEDBY" CONTENT="Stephen Kwek">
@@ -17,20 +18,20 @@
 <BODY LANG="en-US" DIR="LTR">
 <P ALIGN=CENTER STYLE="margin-top: 0.17in; page-break-after: avoid"><FONT FACE="Albany, sans-serif"><FONT SIZE=4>Code
 Samples</FONT></FONT></P>
-<P><FONT SIZE=3>The types of typical software developer interview
-coding questions (as can be found in glassdoor.com) can be
-categorized into the following topics. I have identified one or two
-problems that are either more challenging or most representative of
-each topic and have written some code for it. The code are mostly
-written in C/C++ and a couple of python code fragments. </FONT>
+<P><FONT SIZE=3>The types of fundamental coding problems often used
+for interviewing software engineer candidates can be categorized into
+the following topics. I have identified one or two problems that are
+either more challenging or most representative of each topic and have
+written some code for it. The code samples are mostly written in
+C/C++ and a couple of python code fragments. </FONT>
 </P>
 <OL>
 	<LI><P><FONT SIZE=3><B>Binary Search</B>: Binary search is a common
-	question, be it standard binary search, (STL) lowerbound, upperbound
-	and range algorithms, binary search on two or more sorted arrays,
-	etc. A more challenging question in this topic is the following,
-	which I would encourage you to take sometime to think about it
-	before looking at the comment or code. </FONT>
+	interview question, be it standard binary search, (STL) lowerbound,
+	upperbound and range algorithms, binary search on two or more sorted
+	arrays, etc. A more challenging question in this topic is the
+	following, which I would encourage you to take sometime to think
+	about it before looking at the comment or code. </FONT>
 	</P>
 	<P><FONT SIZE=3><B>Problem:</B> Implement log_2 using square root
 	only. In other words, given a constant c, we want to find y s.t. 2^y
@@ -40,13 +41,13 @@ written in C/C++ and a couple of python code fragments. </FONT>
 	simply use Newton-Raphspn method or binary search on the line 2^y by
 	searching for 2^y ~ c. With this restriction, instead of performing
 	binary search on the line 2^y, we perform search on the line
-	log(2^y) by making use of the fact that on the line y, the mid-point
-	of y_1 and y_2 corresponds to (log(2^y_1) + log(2^y_2))/2 =
-	log(2^y_1 * 2^y_2)/2 = sqrt(y_1*y_2). Effectively, instead of doing
-	an 'even-split search with mid-point (y_1 + y_2)/2 as in standard
-	binary search, we have the mid-point being sqrt(y_1 * y_2) by
-	transforming the search space.</FONT></P>
-	<P><FONT SIZE=3><B>Code:</B></FONT><FONT SIZE=3> <A HREF="log2">available
+	log(2^y) = y by making use of the fact that on the line y, the
+	mid-point of y_1 and y_2 corresponds to 2^og(2^y_1) + log(2^y_2))/2
+	= 2^g(2^y_1 * 2^y_2)/2 = sqrt(y_1*y_2). Effectively, instead of
+	doing an 'even-split search with mid-point (y_1 + y_2)/2 as in
+	standard binary search, we have the mid-point being sqrt(y_1 * y_2)
+	by transforming the search space.</FONT></P>
+	<P><FONT SIZE=3><B>Code:</B></FONT> <FONT SIZE=3><A HREF="log2">available
 	here</A>. </FONT>
 	</P>
 	<LI><P><FONT SIZE=3><B>Linear Sweep</B> (including Greedy
@@ -54,10 +55,10 @@ written in C/C++ and a couple of python code fragments. </FONT>
 	asked to produce an optimal solution that consists of either a
 	single (or a pair of ) instance of the array, or a subarray that
 	produces some optimum measure. The typical approach is to initialize
-	the current best solution for the first item. As you scan from 'left
-	to right', when a better solution is found, update the best
-	solution. A good source of discussion is the classic Jon Louis
-	Bentley's book “Programming Pearls”. </FONT>
+	the current best solution with the the first item. As you scan from
+	'left to right', when a better solution is found, update the best
+	solution. A good source of discussion is the classic <A HREF="http://www.amazon.com/Programming-Pearls-Jon-Bentley/dp/8177588583/ref=cm_cr_pr_product_top">Jon
+	Louis Bentley's book “Programming Pearls”</A>. </FONT>
 	</P>
 	<OL>
 		<P><FONT SIZE=3><B>Problem:</B> Given the price of a given stock at
@@ -71,7 +72,7 @@ written in C/C++ and a couple of python code fragments. </FONT>
 		</P>
 		<LI><P STYLE="font-weight: normal"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>maintain
 		a current min and current max. Initially both have A[0] as their
-		values. They are  updated as we scan the next element. </FONT></FONT>
+		values. They are updated as we scan the next element. </FONT></FONT>
 		</P>
 		<LI><P STYLE="font-weight: normal"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>When
 		we have a new max value, we check if (current max - current min) is
@@ -81,17 +82,17 @@ written in C/C++ and a couple of python code fragments. </FONT>
 		we have a new min value, we start all over by also setting max to
 		the new min. </FONT></FONT>
 		</P>
-		<P><FONT SIZE=3><B>Code:</B></FONT><FONT SIZE=3> <A HREF="stock">available
+		<P><FONT SIZE=3><B>Code:</B></FONT> <FONT SIZE=3><A HREF="stock">available
 		here</A>.</FONT></P>
 	</OL>
 	<LI><P><FONT SIZE=3><B>Dynamic Programming</B>: In a nutshell,
 	dynamic programming starts with solutions for the trivial cases (i,e
-	boundary condition) and subsequently, extend the partial solutions
-	to set of even larger partial solutions (using a recurrence
-	relation) until we solved the entire problem. It involves
-	maintaining a data structure, typically in the form of an array
-	(could be 1D, 2D, 3D, etc). Sometime the data structure could be a
-	tree, a triangular matrix, or a graph with partial (linear) order. </FONT>
+	boundary condition) and iteratively, extends the partial solutions
+	to set of even larger partial solutions using a recurrence relation
+	until we solved the entire problem. It involves maintaining a data
+	structure, typically in the form of an array (could be 1D, 2D, 3D,
+	etc). Sometime the data structure could be a tree, a triangular
+	matrix, or a graph with partial (linear) order. </FONT>
 	</P>
 	<OL>
 		<P><FONT SIZE=3><B>Problem: </B><SPAN STYLE="font-weight: normal">On</SPAN>
@@ -103,13 +104,13 @@ written in C/C++ and a couple of python code fragments. </FONT>
 		</P>
 		<P><FONT SIZE=3><B>Comment:</B> Assuming that N and M can be quite
 		large, the straightforward approach of maintaining a 2D table may
-		not be feasible and it is not memory efficient to store the missing
-		edges in a sparse adjacency matrix. </FONT>
+		not be feasible. Also it is not memory efficient to store the
+		missing edges in a sparse adjacency matrix. </FONT>
 		</P>
-		<P><FONT SIZE=3><B>Code: </B><SPAN STYLE="font-weight: normal">There
+		<P><FONT SIZE=3><B>Code: </B></FONT><FONT SIZE=3><SPAN STYLE="font-weight: normal">There
 		are three versions of the code, The first uses a 2D O(MN) table.
-		The second maintain the current two O(M) rows that we are
-		processing. The last maintain only 1 row. <A HREF="dynamicProgramming">Code
+		The second maintains the current two O(M) rows that we are
+		processing. The last maintains only 1 row. <A HREF="dynamicProgramming">Code
 		is available here</A>.</SPAN></FONT></P>
 	</OL>
 	<LI><P><FONT SIZE=3><B>Recursion, Depth(or Breath)-first-search</B></FONT><FONT SIZE=3>:
@@ -117,7 +118,7 @@ written in C/C++ and a couple of python code fragments. </FONT>
 	</P>
 	<OL>
 		<P><FONT SIZE=3><B>Problem: </B>Given an NxN 'chessboard', find a
-		placement of N queen so that none of them can hit each other. You
+		placement of N queen so that none of them can hit each other. Your
 		function should takes in N and printout the queen placement if it
 		is possible.</FONT></P>
 		<P><FONT SIZE=3><B>Comment:</B> A queen can dominate a row, a
@@ -127,8 +128,8 @@ written in C/C++ and a couple of python code fragments. </FONT>
 		diagonal and (N-1-i+j) tr_bl diagonal. Further, for efficiency, we
 		do not need to create the entire NxN board as we are processing the
 		rows from top to bottom. We 'just need' to keep track of which
-		column we placed the queen.</FONT></P>
-		<P><FONT SIZE=3><B>Code:</B></FONT><FONT SIZE=3> <A HREF="nQueen">available
+		column we place the queen.</FONT></P>
+		<P><FONT SIZE=3><B>Code:</B></FONT> <FONT SIZE=3><A HREF="nQueen">available
 		here</A>. </FONT>
 		</P>
 	</OL>
@@ -147,27 +148,29 @@ written in C/C++ and a couple of python code fragments. </FONT>
 		</P>
 		<P STYLE="font-weight: normal"><FONT SIZE=3><B>Comment:</B> There
 		are a number of ways to solve this. My favorite is to use the fact
-		that if the binary-tree is indeed a binary search tree than the
+		that if a binary-tree is indeed a binary search tree than the
 		values of the nodes visited in an in-order traversal are in
 		monotonically increasing order. </FONT>
 		</P>
-		<P><FONT SIZE=3><B>Code:</B></FONT><FONT SIZE=3><SPAN STYLE="font-weight: normal">
-		<A HREF="checkBST">available here</A>.</SPAN></FONT></P>
+		<P><FONT SIZE=3><B>Code:</B></FONT> <FONT SIZE=3><SPAN STYLE="font-weight: normal"><A HREF="checkBST">available
+		here</A>.</SPAN></FONT></P>
 	</OL>
-	<LI><P><FONT SIZE=3><B>String Parsing</B>: write a simple regular
-	expression matcher, evaluation of arithmetic expression,
-	palindrome-related questions. </FONT>
+	<LI><P><FONT SIZE=3><B>String Parsing</B>: Typical questions involve
+	writing a simple regular expression matcher, evaluation of
+	arithmetic expression, palindrome-related, all possible partitioning
+	of a string into dictioary words. </FONT>
 	</P>
 	<OL>
 		<P><FONT SIZE=3><B>Problem:</B> Write a simple pattern matching
-		function that match '.' to any single character and '*' to any
+		function that matches '.' to any single character and '*' to any
 		normal of the preceding characters. Example match(“aa”, “a”),
 		match(“aaa”,”aa”) return false, while match (“aaab”,
 		“a*a*b”) and match(“aaaba”, “a*.a”) return true.</FONT></P>
-		<P><FONT SIZE=3><B>Code:</B></FONT><FONT SIZE=3> <A HREF="matchPattern">available
+		<P><FONT SIZE=3><B>Code:</B></FONT> <FONT SIZE=3><A HREF="matchPattern">available
 		here</A>.</FONT></P>
-		<P><FONT SIZE=3>Another interesting problem that written in C/C++
-		will take a few lines but in python is a one liner. </FONT>
+		<P></P>
+		<P><FONT SIZE=3>Another interesting problem that when written in
+		C/C++ will take a few lines but in python, it is a one liner. </FONT>
 		</P>
 		<P><FONT SIZE=3><B>Problem:</B> Give a string say “This is an
 		example”, reverse each word in the string to obtain “sihT si na
@@ -176,8 +179,8 @@ written in C/C++ and a couple of python code fragments. </FONT>
 		line.split(' ')])</FONT></P>
 	</OL>
 	<LI><P><FONT SIZE=3><B>Combinatorial Enumeration</B>: powerset,
-	permutation and combination with/with item duplications. My favorite
-	is </FONT>
+	permutation and combination with/with item duplications, enumerating
+	permutation in 'lexicographic order'. My favorite is </FONT>
 	</P>
 	<OL>
 		<P><FONT SIZE=3><B>Problem:</B> (Gray Code): Enumerate all length N
@@ -188,7 +191,9 @@ written in C/C++ and a couple of python code fragments. </FONT>
 		</P>
 		<P><FONT SIZE=3><B>Code:</B> The following python code does it. It
 		is somewhat 'shorter' than if I were to write it in C/C++ (or Java)
-		because of python's list comprehension capability.</FONT></P>
+		because of python's list comprehension capability. (Note: the code
+		could be squeeze to one line but it becomes unreadable). </FONT>
+		</P>
 		<OL>
 			<P><FONT FACE="Courier New, monospace"><FONT SIZE=3>def
 			grayCode(n):</FONT></FONT></P>
@@ -213,12 +218,12 @@ written in C/C++ and a couple of python code fragments. </FONT>
 	<OL>
 		<P><FONT SIZE=3><B>Problem:</B> perform division without
 		multiplication.</FONT></P>
-		<P><FONT SIZE=3><B>Code:</B></FONT><FONT SIZE=3> <A HREF="divide">available
+		<P><FONT SIZE=3><B>Code:</B></FONT> <FONT SIZE=3><A HREF="divide">available
 		here</A>.</FONT></P>
 	</OL>
 	<LI><P><FONT SIZE=3><B>List (pointer) Manipulation</B>: basic linked
-	list, double linked list problems. The classic (attributed to MS I
-	believe) being:</FONT></P>
+	list, double linked list problems. The classic (attributed to
+	Microsoft, I believe) being:</FONT></P>
 	<OL>
 		<P><FONT SIZE=3><B>Problem:</B> Given a linked list, determine if
 		there is a loop.</FONT></P>
@@ -227,7 +232,7 @@ written in C/C++ and a couple of python code fragments. </FONT>
 		traveling one node at a time. If there is no loop, the fast pointer
 		will fall off the list whereas when there is a loop, the fast
 		pointer will eventually loop back and catch up with the slow
-		pointer.  </FONT>
+		pointer. </FONT>
 		</P>
 	</OL>
 	<LI><P><FONT SIZE=3><B>Sorting, (linear) Search and Merging</B>:
@@ -235,7 +240,7 @@ written in C/C++ and a couple of python code fragments. </FONT>
 	textbook, some with slight variation. </FONT>
 	</P>
 	<OL>
-		<P><FONT SIZE=3><B>Problem:</B> TBA. I have not seen something much
+		<P><FONT SIZE=3><B>Problem:</B> TBD. I have not seen something much
 		different from textbook cases. Any suggestion is welcome. </FONT>
 		</P>
 	</OL>
